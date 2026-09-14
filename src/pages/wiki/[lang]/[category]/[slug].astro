@@ -92,7 +92,10 @@ try {
 }
 
 if (!currentArticle) {
-  return Astro.redirect('/404');
+  // Astro.rewrite statt Astro.redirect: liefert die 404-Seite (inkl. echtem
+  // 404-Statuscode) direkt unter der ursprünglichen URL aus, statt per
+  // 302 auf /404 umzuleiten. Verhindert Soft-404s in der Google-Indexierung.
+  return Astro.rewrite('/404');
 }
 ---
 

@@ -10,9 +10,11 @@ type SitemapEntry = {
 const staticEntries: SitemapEntry[] = [
   { path: '/' },
   { path: '/privacy/' },
+  { path: '/imprint/' },
   { path: '/terms/' },
   { path: '/wiki/' },
   { path: '/changelog/' },
+  { path: '/features/' },
 ];
 
 const SUPPORTED_LANGS = ['de', 'en'];
