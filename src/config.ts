@@ -21,7 +21,7 @@ export const SOCIAL_LINKS = {
 
 // Navigation Links
 export const NAV_LINKS = [
-  { href: '/#features', label: 'Features' },
+  { href: '/features', label: 'Features' },
   { href: '/#roadmap', label: 'Roadmap' },
   { href: '/#premium', label: 'Premium' },
   { href: '/wiki', label: 'Wiki' },
@@ -32,7 +32,7 @@ export const FOOTER_LINKS = [
   {
     title: 'Features',
     links: [
-      { label: 'Übersicht', href: '/#features' },
+      { label: 'Übersicht', href: '/features' },
       { label: 'Roadmap', href: '/#roadmap' },
       { label: 'Premium-Aktion', href: '/#pricing' },
     ],
