@@ -1,12 +1,7 @@
-# Zenix
+# Nexus
 
-Zenix is a polished Astro SaaS theme by [Farros FR](https://farrosfr.com) with responsive landing sections, pricing, blog, changelog, dark mode, search, and MDX content support.
-
-[Live demo](https://zenix.farros.co/) · [Repository](https://github.com/farrosfr/zenix)
-
-![alt text](readme-hero.png)
-![alt text](readme-speed.png)
-![alt text](readme-speed-mobile.png)
+The focused Discord bot for streamers and gaming communities.
+Instant alerts, real-time raid defense - no bloat, no filler.
 
 ## Features
 
