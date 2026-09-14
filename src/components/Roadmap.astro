@@ -1,37 +1,34 @@
 ---
-const roadmapItems = [
-  {
-    title: "Anti-Nuke Auto-Restore",
-    description: "Vollautomatische Wiederherstellung nach Angriffen: Gelöschte Kanäle, Rollen und Server-Berechtigungen werden direkt nach Erkennung eines Nukes ohne Datenverlust restauriert.",
-    status: "In Arbeit",
-    statusColor: "bg-primary-500/10 text-primary-600 dark:text-primary-400 border-primary-500/20",
-    // Cyan/Sky für System-Restore & Shield
-    iconColor: "text-sky-500 dark:text-sky-400 bg-sky-500/10 border-sky-500/20",
-    // Lucide Icon: history / rotate-ccw
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`
-  },
-  {
-    title: "Quality of Life & Optimierung",
-    description: "Überarbeitung bestehender Module für ein noch flüssigeres Erlebnis: Schnellere Reaktionszeiten, intuitivere Dashboard-Bedienung und Detailverbesserungen im Alltag.",
-    status: "In Arbeit",
-    statusColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
-    // Amber/Gold für Feinschliff / Wrench
-    iconColor: "text-amber-500 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
-    // Lucide Icon: wrench
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
-  },
-  {
-    title: "Social Media & Live-Alerts",
-    description: "Verpasse keine Streams oder Uploads mehr. Vollautomatische und verzögerungsfreie Benachrichtigungen in deinen Kanälen, sobald du live gehst.",
-    status: "Kürzlich Veröffentlicht",
-    statusColor: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-    // Rose/Rot für YouTube/Twitch
-    iconColor: "text-rose-500 dark:text-rose-400 bg-rose-500/10 border-rose-500/20",
-    // Lucide Icon: video
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`
-  }
-];
 import { DISCORD_SUPPORT_SERVER } from '../config';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Icon/Farbe sind rein dekorativ und bleiben Index-gebunden an t.roadmap.items
+const visuals = [
+  {
+    statusColor: 'bg-primary-500/10 text-primary-600 dark:text-primary-400 border-primary-500/20',
+    iconColor: 'text-sky-500 dark:text-sky-400 bg-sky-500/10 border-sky-500/20',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`,
+  },
+  {
+    statusColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20',
+    iconColor: 'text-amber-500 dark:text-amber-400 bg-amber-500/10 border-amber-500/20',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  },
+  {
+    statusColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
+    iconColor: 'text-rose-500 dark:text-rose-400 bg-rose-500/10 border-rose-500/20',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
+  },
+];
+
+const roadmapItems = t.roadmap.items.map((item, i) => ({ ...item, ...visuals[i] }));
 ---
 
 <section id="roadmap" class="py-32 border-t border-slate-200 dark:border-slate-800 relative">
@@ -39,10 +36,10 @@ import { DISCORD_SUPPORT_SERVER } from '../config';
 
     <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
       <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
-        Die <span class="text-primary-500">Nexus</span> Roadmap
+        {t.roadmap.heading} <span class="text-primary-500">{t.roadmap.headingBrand}</span> Roadmap
       </h2>
       <p class="text-xl text-slate-600 dark:text-slate-400">
-        Bereit für das nächste Level. Nexus liefert dir schon heute maximale Performance. Und das Beste: Wir entwickeln konstant weiter.
+        {t.roadmap.subtitle}
       </p>
     </div>
 
@@ -66,14 +63,14 @@ import { DISCORD_SUPPORT_SERVER } from '../config';
     </div>
 
     <div class="text-center mt-12 reveal-on-scroll">
-      <p class="text-slate-500 dark:text-slate-500 text-sm mb-4">Deine Wunsch-Funktion ist nicht dabei?</p>
+      <p class="text-slate-500 dark:text-slate-500 text-sm mb-4">{t.roadmap.ideaPrompt}</p>
       <a 
         href={DISCORD_SUPPORT_SERVER} 
         target="_blank" 
         rel="noopener noreferrer" 
         class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-slate-950 font-bold px-6 py-3 rounded-2xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-primary-500/20"
       >
-        💡 Idee einreichen & Nexus mitgestalten
+        {t.roadmap.ideaButton}
       </a>
     </div>
   </div>

@@ -84,6 +84,41 @@ export interface Dictionary {
       }[];
     }[];
   };
+  roadmap: {
+    heading: string;
+    headingBrand: string;
+    subtitle: string;
+    ideaButton: string;
+    ideaPrompt: string;
+    items: {
+      title: string;
+      description: string;
+      status: string;
+    }[];
+  };
+  highlights: {
+    heading: string;
+    headingHighlight: string;
+    subtitle: string;
+    card1: {
+      title: string;
+      subtitle: string;
+      description: string;
+      mockupGreeting: string;
+      mockupLine1: string;
+      mockupLine2: string;
+      mockupModuleLabel: string;
+      mockupModuleValue: string;
+      mockupStatusLabel: string;
+      mockupStatusValue: string;
+      mockupTimestamp: string;
+      mockupButton: string;
+    };
+    card2: { title: string; description: string };
+    card3: { title: string; description: string };
+    card4: { title: string; description: string };
+    fullListLink: string;
+  };
   common: {
     invite: string;
   };

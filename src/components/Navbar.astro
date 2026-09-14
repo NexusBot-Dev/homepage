@@ -21,8 +21,6 @@ const navLinks = [
   { href: '/wiki', label: t.nav.wiki },
 ];
 
-// Aktueller Pfad ohne Sprachpräfix, damit der Sprachwechsel auf derselben
-// Unterseite landet statt immer auf der Startseite.
 const langPrefixPattern = new RegExp(`^/(${SUPPORTED_LANGS.join('|')})`);
 const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/';
 ---

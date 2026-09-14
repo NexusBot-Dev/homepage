@@ -13,8 +13,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-// Changelog ist noch nicht auf Directus-Übersetzungen umgestellt (Backlog),
-// bleibt also bewusst unpräfixiert bis dahin.
 const footerGroups = [
   {
     title: t.footer.featuresGroup,
