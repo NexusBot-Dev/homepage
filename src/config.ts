@@ -18,39 +18,3 @@ export const BRAND_LOGO_TEXT = 'N';
 export const SOCIAL_LINKS = {
   discord: 'https://discord.gg/YFCrvBb6t3'
 };
-
-// Navigation Links
-export const NAV_LINKS = [
-  { href: '/features', label: 'Features' },
-  { href: '/#roadmap', label: 'Roadmap' },
-  { href: '/#premium', label: 'Premium' },
-  { href: '/wiki', label: 'Wiki' },
-];
-
-// Footer Links
-export const FOOTER_LINKS = [
-  {
-    title: 'Features',
-    links: [
-      { label: 'Übersicht', href: '/features' },
-      { label: 'Roadmap', href: '/#roadmap' },
-      { label: 'Premium-Aktion', href: '/#pricing' },
-    ],
-  },
-  {
-    title: 'Support & Hilfe',
-    links: [
-      { label: 'Support Server', href: 'https://discord.gg/YFCrvBb6t3' , external: true},
-      { label: 'Dokumentation', href: '/wiki/' },
-      { label: 'Changelog', href: '/changelog/' },
-    ],
-  },
-  {
-    title: 'Rechtliches',
-    links: [
-      { label: 'Impressum', href: '/imprint/' },
-      { label: 'Datenschutzerklärung', href: '/privacy/' },
-      { label: 'Nutzungsbedingungen', href: '/terms/' },
-    ],
-  },
-];

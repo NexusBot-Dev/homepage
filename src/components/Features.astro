@@ -1,6 +1,12 @@
 ---
 import { DISCORD_INVITE_URL } from '../config';
-import { resolvePath } from '../utils/navigation';
+import { localizedPath } from '../utils/navigation';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
 ---
 
 <section id="highlights" class="py-32 bg-slate-50 dark:bg-[#0c0c0f] border-y border-slate-200 dark:border-slate-800 relative overflow-hidden">
@@ -127,7 +133,7 @@ import { resolvePath } from '../utils/navigation';
     <!-- Link zur vollständigen Feature-Liste -->
     <div class="text-center mt-14 reveal-on-scroll">
       <a
-        href={resolvePath('/features')}
+        href={localizedPath(lang, '/features')}
         class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
       >
         Alle Features im Detail ansehen

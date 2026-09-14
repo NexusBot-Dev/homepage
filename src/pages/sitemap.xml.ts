@@ -1,23 +1,25 @@
 import type { APIRoute } from 'astro';
 import { SITE_URL } from '../config';
 import { directus, readItems } from '../lib/directus';
+import { SUPPORTED_LANGS } from '../i18n/config';
 
 type SitemapEntry = {
   path: string;
   lastmod?: Date;
 };
 
-const staticEntries: SitemapEntry[] = [
-  { path: '/' },
+const localizedStaticPaths: string[] = [
+  '/',
+  '/features/',
+  '/wiki/',
+];
+
+const unlocalizedStaticEntries: SitemapEntry[] = [
   { path: '/privacy/' },
   { path: '/imprint/' },
   { path: '/terms/' },
-  { path: '/wiki/' },
   { path: '/changelog/' },
-  { path: '/features/' },
 ];
-
-const SUPPORTED_LANGS = ['de', 'en'];
 
 const escapeXml = (value: string) =>
   value
@@ -72,7 +74,7 @@ export const GET: APIRoute = async () => {
 
       for (const lang of SUPPORTED_LANGS) {
         wikiEntries.push({
-          path: `/wiki/${lang}/${catSlug}/${artSlug}/`
+          path: `/${lang}/wiki/${catSlug}/${artSlug}/`
         });
       }
     }
@@ -80,8 +82,15 @@ export const GET: APIRoute = async () => {
     console.error("Sitemap Directus Fetch Error:", error);
   }
 
+  const localizedEntries: SitemapEntry[] = SUPPORTED_LANGS.flatMap((lang) =>
+    localizedStaticPaths.map((path) => ({
+      path: path === '/' ? `/${lang}/` : `/${lang}${path}`,
+    }))
+  );
+
   const entries: SitemapEntry[] = [
-    ...staticEntries,
+    ...localizedEntries,
+    ...unlocalizedStaticEntries,
     ...wikiEntries
   ];
 

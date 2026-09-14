@@ -2,19 +2,15 @@
 import Button from './Button.astro';
 import Badge from './Badge.astro';
 import { DISCORD_INVITE_URL } from '../config';
+import { useTranslations } from '../i18n';
 
-const features = [
-  { name: 'Moderation, Leveling & Rollen', free: 'Vollständig', premium: 'Vollständig' },
-  { name: 'Stream-Alerts (Twitch, Kick & YouTube)', free: '1x je Plattform', premium: 'Bis zu 5x je Plattform' },
-  { name: 'Smart Roles (getrennte Pings für Twitch, Kick & YT)', free: false, premium: true },
-  { name: 'Gespeicherte Embeds', free: 'Bis zu 5', premium: 'Unbegrenzt' },
-  { name: 'Embed-Farben & Styling', free: 'Standard Mintgrün', premium: 'Freie Farbwahl (Hex) & Custom' },
-  { name: 'Zeitgesteuerte Embeds (Schedules)', free: false, premium: true },
-  { name: 'Reaction Roles: Basis-Modus', free: 'Alle Rollen wählbar', premium: 'Alle Rollen wählbar' },
-  { name: 'Reaction Roles: Exklusiv-Gruppen (Entweder-Oder)', free: false, premium: true },
-  { name: 'Ticket-System: Kategorien / Panels', free: 'Bis zu 2', premium: 'Bis zu 10' },
-  { name: 'Ticket-Workflow (72h-Close, DM-Transkript & Auto-Delete)', free: 'Vollständig', premium: 'Vollständig'}
-];
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const features = t.premium.tableRows;
 ---
 
 <section id="premium" class="py-32 bg-slate-50 dark:bg-[#0c0c0f] border-t border-slate-200 dark:border-slate-800">
@@ -22,16 +18,16 @@ const features = [
 
     <div class="text-center max-w-3xl mx-auto mb-8 reveal-on-scroll">
       <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
-        Einfach. Transparent. <span class="text-primary-500">Fair.</span>
+        {t.premium.heading} <span class="text-primary-500">{t.premium.headingHighlight}</span>
       </h2>
       <p class="text-xl text-slate-600 dark:text-slate-400">
-        Kein Feature versteckt. Kein Abo-Trick. Nur ein <span class="text-primary-500">Bot</span>, der funktioniert.
+        {t.premium.subtitlePrefix} <span class="text-primary-500">{t.premium.subtitleBotWord}</span>{t.premium.subtitleSuffix}
       </p>
     </div>
 
     <div class="flex justify-center mt-6 md:mt-8 mb-16 reveal-on-scroll">
       <Badge variant="primary" class="px-4 py-1.5 text-sm border border-primary-200 dark:border-primary-800 backdrop-blur-md bg-white/50 dark:bg-primary-900/50 shadow-lg shadow-primary-500/5">
-        <span class="mr-2">✨</span> Early-Bird: Hol dir 3 Monate Premium gratis. Limitiert auf die ersten 75 Server!
+        <span class="mr-2">✨</span> {t.premium.earlyBirdBadge}
       </Badge>
     </div>
 
@@ -40,47 +36,42 @@ const features = [
 
       <!-- Free Plan -->
       <div class="glass-panel rounded-3xl p-8 flex flex-col reveal-on-scroll">
-        <h3 class="text-2xl font-heading font-bold text-slate-900 dark:text-white mb-2">Free</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm mb-8">Alles was du brauchst, um loszulegen.</p>
+        <h3 class="text-2xl font-heading font-bold text-slate-900 dark:text-white mb-2">{t.premium.free.name}</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mb-8">{t.premium.free.tagline}</p>
         <div class="mb-8">
           <span class="text-5xl font-heading font-extrabold text-slate-900 dark:text-white">$0</span>
-          <span class="text-slate-500 dark:text-slate-400 font-medium"> / für immer</span>
+          <span class="text-slate-500 dark:text-slate-400 font-medium"> {t.premium.free.priceSuffix}</span>
         </div>
         <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" class="w-full block">
-          <Button variant="outline" class="w-full mb-8">Nexus einladen</Button>
+          <Button variant="outline" class="w-full mb-8">{t.premium.free.cta}</Button>
         </a>
         <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300 flex-grow">
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Moderation, Leveling & Roles – vollständig</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Stream Alerts (je 1x Twitch, Kick & YouTube)</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Bis zu 5 gespeicherte Embeds</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Reaction Roles (alle Rollen gleichzeitig wählbar)</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Nexus Mintgrün Branding</li>
+          {t.premium.free.features.map((feature) => (
+            <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> {feature}</li>
+          ))}
         </ul>
       </div>
 
       <!-- Premium Plan -->
       <div class="glass-panel border-2 border-primary-500 dark:border-primary-500 rounded-3xl p-8 flex flex-col relative shadow-2xl shadow-primary-500/10 reveal-on-scroll" style="transition-delay: 100ms;">
         <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-          <Badge variant="primary" class="px-4 py-1.5 font-bold shadow-sm">Popular</Badge>
+          <Badge variant="primary" class="px-4 py-1.5 font-bold shadow-sm">{t.premium.premiumPlan.popularBadge}</Badge>
         </div>
-        <h3 class="text-2xl font-heading font-bold text-slate-900 dark:text-white mb-2 mt-2">Premium</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm mb-8">Mehr Kontrolle. Mehr Möglichkeiten.</p>
+        <h3 class="text-2xl font-heading font-bold text-slate-900 dark:text-white mb-2 mt-2">{t.premium.premiumPlan.name}</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mb-8">{t.premium.premiumPlan.tagline}</p>
         <div class="mb-8">
           <span class="text-5xl font-heading font-extrabold text-slate-900 dark:text-white">$3.99</span>
-          <span class="text-slate-500 dark:text-slate-400 font-medium"> / Monat</span>
+          <span class="text-slate-500 dark:text-slate-400 font-medium"> {t.premium.premiumPlan.priceSuffix}</span>
         </div>
         <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" class="w-full block mb-8">
           <span class="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-slate-950 font-bold px-6 py-3 rounded-2xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-primary-500/20 text-center cursor-pointer">
-            ✨ Premium holen
+            {t.premium.premiumPlan.cta}
           </span>
         </a>
         <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300 flex-grow">
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Alles aus Free, plus:</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Bis zu 5 Stream-Alerts je Plattform</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Smart Roles (getrennte Pings für Twitch, Kick & YT)</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Unbegrenzte Embeds & eigene Farben</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Exklusive Reaction Role Gruppen (Entweder-Oder)</li>
-          <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Zeitgesteuerte Embeds (Schedules)</li>
+          {t.premium.premiumPlan.features.map((feature) => (
+            <li class="flex gap-3"><svg class="h-5 w-5 text-primary-500 dark:text-primary-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> {feature}</li>
+          ))}
         </ul>
       </div>
     </div>
@@ -89,10 +80,10 @@ const features = [
     <div class="max-w-4xl mx-auto reveal-on-scroll">
       <div class="text-center mb-10">
         <h3 class="text-2xl md:text-3xl font-heading font-bold text-slate-900 dark:text-white mb-3">
-          Alle Features im direkten Vergleich
+          {t.premium.comparisonTitle}
         </h3>
         <p class="text-slate-500 dark:text-slate-400 text-sm">
-          Transparente Übersicht aller Funktionen im Free- und Premium-Tarif.
+          {t.premium.comparisonSubtitle}
         </p>
       </div>
 
@@ -101,9 +92,9 @@ const features = [
           <table class="w-full text-left text-sm">
             <thead>
               <tr class="border-b border-slate-200 dark:border-slate-800/80 bg-slate-100/50 dark:bg-white/[0.02]">
-                <th class="py-4 px-6 font-semibold text-slate-900 dark:text-white">Feature</th>
-                <th class="py-4 px-6 font-semibold text-slate-900 dark:text-white w-1/4 text-center">Free</th>
-                <th class="py-4 px-6 font-semibold text-primary-500 dark:text-primary-400 w-1/4 text-center bg-primary-500/[0.03]">Premium</th>
+                <th class="py-4 px-6 font-semibold text-slate-900 dark:text-white">{t.premium.tableFeature}</th>
+                <th class="py-4 px-6 font-semibold text-slate-900 dark:text-white w-1/4 text-center">{t.premium.tableFree}</th>
+                <th class="py-4 px-6 font-semibold text-primary-500 dark:text-primary-400 w-1/4 text-center bg-primary-500/[0.03]">{t.premium.tablePremium}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200 dark:divide-slate-800/60">
@@ -146,10 +137,10 @@ const features = [
       </div>
       <div class="mt-12 text-center reveal-on-scroll">
         <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
-          Bereit, deinen Server abzusichern und aufzuwerten?
+          {t.premium.finalCtaText}
         </p>
         <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-slate-950 font-bold px-8 py-3.5 rounded-2xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-xl shadow-primary-500/20 cursor-pointer">
-          Nexus zu Discord hinzufügen
+          {t.premium.finalCtaButton}
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>

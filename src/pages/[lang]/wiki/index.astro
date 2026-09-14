@@ -1,7 +1,9 @@
 ---
-import { directus, readItems } from '../../lib/directus';
+import { directus, readItems } from '../../../lib/directus';
 
-let targetUrl = '/404';
+const { lang } = Astro.params;
+
+let targetSlug = 'start/start';
 
 try {
   const categories = await directus.request(
@@ -21,19 +23,18 @@ try {
 
   if (categories.length > 0 && articles.length > 0) {
     const firstArticle = articles[0];
-    
+
     const catId = typeof firstArticle.category === 'object' && firstArticle.category !== null
       ? (firstArticle.category.id || firstArticle.category.doc_categories_id)
       : firstArticle.category;
 
     const matchedCategory = categories.find((c: any) => String(c.id) === String(catId)) || categories[0];
 
-    targetUrl = `/wiki/de/${matchedCategory.slug}/${firstArticle.slug}`;
+    targetSlug = `${matchedCategory.slug}/${firstArticle.slug}`;
   }
 } catch (error) {
   console.error("Wiki Index Redirect Error:", error);
 }
 
-targetUrl = '/wiki/de/start/start/'
-return Astro.redirect(targetUrl, 302);
+return Astro.redirect(`/${lang}/wiki/start/start/`, 302);
 ---

@@ -2,8 +2,45 @@
 import { Image } from 'astro:assets';
 import logoImg from '../assets/logo.png';
 
-import { FOOTER_LINKS, BRAND_NAME, BRAND_LOGO_TEXT, SITE_DESCRIPTION } from '../config';
-import { resolvePath } from '../utils/navigation';
+import { BRAND_NAME, SITE_DESCRIPTION } from '../config';
+import { localizedPath, resolvePath } from '../utils/navigation';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Changelog ist noch nicht auf Directus-Übersetzungen umgestellt (Backlog),
+// bleibt also bewusst unpräfixiert bis dahin.
+const footerGroups = [
+  {
+    title: t.footer.featuresGroup,
+    links: [
+      { label: t.footer.overview, href: localizedPath(lang, '/features') },
+      { label: t.footer.roadmap, href: localizedPath(lang, '/#roadmap') },
+      { label: t.footer.premiumPromo, href: localizedPath(lang, '/#premium') },
+    ],
+  },
+  {
+    title: t.footer.supportGroup,
+    links: [
+      { label: t.footer.supportServer, href: 'https://discord.gg/YFCrvBb6t3', external: true },
+      { label: t.footer.docs, href: localizedPath(lang, '/wiki') },
+      { label: t.footer.changelog, href: resolvePath('/changelog') },
+    ],
+  },
+  {
+    title: t.footer.legalGroup,
+    links: [
+      { label: t.footer.imprint, href: resolvePath('/imprint') },
+      { label: t.footer.privacy, href: resolvePath('/privacy') },
+      { label: t.footer.terms, href: resolvePath('/terms') },
+    ],
+  },
+];
 ---
 
 <footer class="bg-white dark:bg-[#09090b] border-t border-slate-200 dark:border-slate-800 pt-16 pb-8 transition-colors">
@@ -11,7 +48,7 @@ import { resolvePath } from '../utils/navigation';
     <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[minmax(280px,1.35fr)_repeat(3,minmax(140px,1fr))] lg:gap-10 mb-12">
       <!-- Brand -->
       <div class="flex-shrink-0">
-        <a href="/" class="flex items-center gap-2 group">
+        <a href={localizedPath(lang, '/')} class="flex items-center gap-2 group">
           <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 overflow-hidden">
             <Image
               src={logoImg}
@@ -29,27 +66,22 @@ import { resolvePath } from '../utils/navigation';
       </div>
 
       <!-- Links -->
-      {FOOTER_LINKS.map(group => (
+      {footerGroups.map(group => (
         <div>
           <h3 class="font-semibold text-slate-900 dark:text-white mb-4">{group.title}</h3>
           <ul class="space-y-3">
-            {group.links.map((link: any) => {
-              const isExternal = link.external || link.href.startsWith('http://') || link.href.startsWith('https://');
-              const finalHref = isExternal ? link.href : resolvePath(link.href);
-
-              return (
-                <li>
-                  <a
-                    href={finalHref}
-                    target={isExternal ? '_blank' : undefined}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              );
-            })}
+            {group.links.map((link: any) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       ))}
@@ -57,7 +89,7 @@ import { resolvePath } from '../utils/navigation';
 
     <div class="border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <p class="text-sm text-slate-500 dark:text-slate-400">
-        &copy; {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
+        &copy; {new Date().getFullYear()} {BRAND_NAME}. {t.footer.rights}
       </p>
     </div>
   </div>

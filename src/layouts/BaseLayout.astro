@@ -8,6 +8,7 @@ import Footer from '../components/Footer.astro';
 import CommandPalette from '../components/CommandPalette.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from '../config';
 import { resolvePath } from '../utils/navigation';
+import { SUPPORTED_LANGS, DEFAULT_LANG } from '../i18n/config';
 
 interface Props {
   title: string;
@@ -24,6 +25,7 @@ interface Props {
     en?: string;
     [key: string]: string | undefined;
   };
+  appendSiteTitle?: boolean;
 }
 
 const {
@@ -37,28 +39,30 @@ const {
   lang: propLang,
   canonical: propCanonical,
   hreflangUrls,
+  appendSiteTitle = true,
 } = Astro.props;
 
 const siteURL = SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`;
 const canonicalPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 
-const detectedLang = Astro.url.pathname.startsWith('/wiki/en') ? 'en' : 'de';
+const detectedLang = (Astro.locals.lang as string) || DEFAULT_LANG;
 const currentLang = propLang || detectedLang;
 
 const canonicalURL = propCanonical || new URL(canonicalPath, siteURL).href;
 const imageURL = new URL(image, siteURL).href;
-const fullTitle = `${title} | ${SITE_TITLE}`;
+const fullTitle = appendSiteTitle ? `${title} | ${SITE_TITLE}` : title;
 const robotsContent = 'index, follow';
 
 let resolvedHreflangs = hreflangUrls;
 
-if (!resolvedHreflangs && Astro.url.pathname.startsWith('/wiki/')) {
-  const wikiMatch = Astro.url.pathname.match(/^\/wiki\/(de|en)(\/.*)?$/);
-  if (wikiMatch) {
-    const subPath = (wikiMatch[2] || '/').replace(/\/+$/, '') + '/';
+if (!resolvedHreflangs) {
+  const segments = Astro.url.pathname.split('/').filter(Boolean);
+  if ((SUPPORTED_LANGS as readonly string[]).includes(segments[0])) {
+    const rest = segments.slice(1).join('/');
+    const subPath = rest ? `/${rest}/` : '/';
     resolvedHreflangs = {
-      de: new URL(`/wiki/de${subPath}`, siteURL).href,
-      en: new URL(`/wiki/en${subPath}`, siteURL).href,
+      de: new URL(`/de${subPath}`, siteURL).href,
+      en: new URL(`/en${subPath}`, siteURL).href,
     };
   }
 }
@@ -96,6 +100,26 @@ const structuredData =
         description,
         url: siteURL,
       };
+
+const isHomepage = Astro.url.pathname === '/' || Astro.url.pathname === '';
+
+const softwareApplicationData = isHomepage
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: SITE_TITLE,
+      applicationCategory: 'CommunicationApplication',
+      operatingSystem: 'Discord',
+      description: SITE_DESCRIPTION,
+      url: siteURL,
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        category: 'Free',
+      },
+    }
+  : null;
 ---
 
 <!DOCTYPE html>
@@ -146,6 +170,9 @@ const structuredData =
     <meta name="twitter:image" content={imageURL} />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    {softwareApplicationData && (
+      <script type="application/ld+json" set:html={JSON.stringify(softwareApplicationData)} />
+    )}
     
     <title>{fullTitle}</title>
 
@@ -171,11 +198,11 @@ const structuredData =
   </head>
   <body class="flex flex-col min-h-screen bg-[#09090b] text-slate-100 antialiased selection:bg-primary-500/30 selection:text-primary-300">
     <CommandPalette />
-    <Navbar />
+    <Navbar lang={currentLang} />
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={currentLang} />
 
     <!-- Global Intersection Observer for Scroll Animations -->
     <script>

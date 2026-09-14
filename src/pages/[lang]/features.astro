@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureList from '../../components/FeatureList.astro';
+
+const { lang: rawLang } = Astro.params;
+const lang = rawLang ?? 'de';
+---
+
+<BaseLayout title="Features" description="Alle Nexus-Module im Detail: Moderation, Leveling, Tickets, Stream-Alerts, Reaction Roles und mehr.">
+  <FeatureList lang={lang} />
+</BaseLayout>

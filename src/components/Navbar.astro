@@ -3,8 +3,28 @@ import { Image } from 'astro:assets';
 import logoImg from '../assets/logo.png';
 
 import Button from './Button.astro';
-import { NAV_LINKS, BRAND_NAME } from '../config';
-import { resolvePath } from '../utils/navigation';
+import { BRAND_NAME } from '../config';
+import { localizedPath, resolvePath } from '../utils/navigation';
+import { useTranslations, SUPPORTED_LANGS } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const navLinks = [
+  { href: '/features', label: t.nav.features },
+  { href: '/#roadmap', label: t.nav.roadmap },
+  { href: '/#premium', label: t.nav.premium },
+  { href: '/wiki', label: t.nav.wiki },
+];
+
+// Aktueller Pfad ohne Sprachpräfix, damit der Sprachwechsel auf derselben
+// Unterseite landet statt immer auf der Startseite.
+const langPrefixPattern = new RegExp(`^/(${SUPPORTED_LANGS.join('|')})`);
+const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/';
 ---
 
 <header class="sticky top-0 z-[90] w-full transition-colors duration-300 glass-panel border-x-0 border-t-0 rounded-none shadow-sm pointer-events-auto">
@@ -12,7 +32,7 @@ import { resolvePath } from '../utils/navigation';
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a href="/" class="flex items-center gap-2 group">
+        <a href={localizedPath(lang, '/')} class="flex items-center gap-2 group">
           <div class="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 overflow-hidden">
             <Image
               src={logoImg}
@@ -28,22 +48,35 @@ import { resolvePath } from '../utils/navigation';
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center gap-8">
-        {NAV_LINKS.map(link => (
-          <a href={resolvePath(link.href)} class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        {navLinks.map(link => (
+          <a href={localizedPath(lang, link.href)} class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
             {link.label}
           </a>
         ))}
       </nav>
 
-      <!-- CTA Button (Desktop) -->
+      <!-- CTA Button + Sprachswitcher (Desktop) -->
       <div class="hidden md:flex items-center gap-4">
-        <!-- Login Button -->
-        <Button href={resolvePath('https://dashboard.trynexus.de/')} variant="primary" size="sm">Zum Dashboard</Button>
+        <div class="flex items-center bg-slate-950/80 border border-slate-800 rounded-lg p-1 gap-1">
+          {SUPPORTED_LANGS.map((l) => (
+            <a
+              href={resolvePath(`/${l}${pathWithoutLang}`)}
+              class={`px-2.5 py-1 rounded text-xs font-medium transition-all ${
+                l === lang
+                  ? 'bg-primary-500/20 text-primary-400 border border-primary-500/40 shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent'
+              }`}
+            >
+              {l.toUpperCase()}
+            </a>
+          ))}
+        </div>
+        <Button href="https://dashboard.trynexus.de/" variant="primary" size="sm">{t.nav.dashboard}</Button>
       </div>
 
       <!-- Mobile menu button -->
       <div class="md:hidden flex items-center gap-2">
-        <button onclick="window.toggleCommandPalette()" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none rounded-lg text-sm" aria-label="Search">
+        <button onclick="window.toggleCommandPalette()" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none rounded-lg text-sm" aria-label={t.nav.search}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
         </button>
 
@@ -60,13 +93,30 @@ import { resolvePath } from '../utils/navigation';
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-      {NAV_LINKS.map(link => (
-        <a href={resolvePath(link.href)} class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800">
+      {navLinks.map(link => (
+        <a href={localizedPath(lang, link.href)} class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800">
           {link.label}
         </a>
       ))}
+
+      <!-- Sprachswitcher (Mobile) -->
+      <div class="flex items-center gap-1 px-3 pt-2">
+        {SUPPORTED_LANGS.map((l) => (
+          <a
+            href={resolvePath(`/${l}${pathWithoutLang}`)}
+            class={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+              l === lang
+                ? 'bg-primary-500/20 text-primary-400 border border-primary-500/40'
+                : 'text-slate-400 hover:text-slate-200 border border-transparent'
+            }`}
+          >
+            {l.toUpperCase()}
+          </a>
+        ))}
+      </div>
+
       <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-        <Button href={resolvePath('https://dashboard.trynexus.de/')} variant="primary" size="sm">Zum Dashboard</Button>
+        <Button href="https://dashboard.trynexus.de/" variant="primary" size="sm">{t.nav.dashboard}</Button>
       </div>
     </div>
   </div>

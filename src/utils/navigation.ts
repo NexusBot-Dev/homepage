@@ -22,3 +22,22 @@ export function resolvePath(path: string) {
   
   return path;
 }
+
+const UNPREFIXED_ROUTES = ['/imprint', '/privacy', '/terms'];
+
+export function localizedPath(lang: string, path: string) {
+  if (path.startsWith('http') || path.startsWith('#')) {
+    return path;
+  }
+
+  if (!path.startsWith('/')) {
+    return resolvePath(path);
+  }
+
+  if (UNPREFIXED_ROUTES.some((route) => path === route || path.startsWith(`${route}/`))) {
+    return resolvePath(path);
+  }
+
+  const suffix = path === '/' ? '/' : path;
+  return resolvePath(`/${lang}${suffix}`);
+}

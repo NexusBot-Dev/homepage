@@ -1,8 +1,15 @@
 ---
 import Button from './Button.astro';
 import Badge from './Badge.astro';
-import { resolvePath } from '../utils/navigation';
+import { useTranslations } from '../i18n';
 import { DISCORD_INVITE_URL } from '../config';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="relative pt-32 pb-32 lg:pt-48 lg:pb-40 overflow-hidden">
@@ -14,11 +21,11 @@ import { DISCORD_INVITE_URL } from '../config';
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-on-scroll">
     <h1 class="text-6xl sm:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight text-slate-900 dark:text-white mb-8 max-w-5xl mx-auto leading-[1.1]">
-      Der moderne Bot für <span class="text-primary-500">deine Community.</span>
+      {t.hero.titleLine1} <span class="text-primary-500">{t.hero.titleHighlight}</span>
     </h1>
 
     <p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-12 max-w-4xl mx-auto font-sans leading-relaxed">
-      Nexus brings Leveling, Moderation und Reaction Roles auf deinen Server - blitzschnell per Knopfdruck, garantiert ohne nervige Paywalls und zu 100% datenschutzfreundlich in Deutschland gehostet.
+      {t.hero.subtitle}
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 w-full max-w-md mx-auto sm:max-w-none">
@@ -28,10 +35,10 @@ import { DISCORD_INVITE_URL } from '../config';
         rel="noopener noreferrer"
         class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-lg bg-primary-500 hover:bg-primary-600 text-slate-950 font-bold px-8 py-4 rounded-xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-primary-500/20"
       >
-        Nexus einladen
+        {t.hero.inviteCta}
       </a>
       <Button href="#highlights" variant="outline" size="lg" class="w-full sm:w-auto text-lg px-8 py-4 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
-        Features entdecken
+        {t.hero.discoverCta}
       </Button>
     </div>
 
