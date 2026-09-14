@@ -1,11 +1,14 @@
 ---
 import { DISCORD_INVITE_URL } from '../config';
+import { resolvePath } from '../utils/navigation';
 
 interface Feature {
   title: string;
   description: string;
   tag?: 'Free' | 'Premium' | 'Bald verfügbar';
   icon: string;
+  // Optional: Pfad zum passenden Wiki-Artikel, z. B. '/wiki/de/moderation/warnungen/'
+  wikiHref?: string;
 }
 
 interface ModuleGroup {
@@ -24,12 +27,14 @@ const groups: ModuleGroup[] = [
         description: 'Warnungen, Kicks, Bans und Mutes mit vollständigem, nachvollziehbarem Log-Verlauf für dein Mod-Team.',
         tag: 'Free',
         icon: iconCheck,
+        wikiHref: '/wiki/de/dokumentation/moderation/',
       },
       {
         title: 'AutoMod',
         description: 'Gesperrte Schlagworte und Honeypot-Kanäle, integriert über Discords native AutoMod-Schnittstelle.',
         tag: 'Free',
         icon: iconCheck,
+        wikiHref: '/wiki/de/dokumentation/automod/',
       },
       {
         title: 'Anti-Nuke Auto-Restore',
@@ -47,6 +52,7 @@ const groups: ModuleGroup[] = [
         description: 'Automatische XP-Vergabe für Chat-Aktivität inklusive Rollen-Rewards bei Level-Aufstieg.',
         tag: 'Free',
         icon: iconCheck,
+        wikiHref: '/wiki/de/dokumentation/leveling/',
       },
       {
         title: 'Reaction Roles',
@@ -59,6 +65,7 @@ const groups: ModuleGroup[] = [
         description: 'Individuelle Begrüßungs- und Abschiedsnachrichten, die automatisch beim Server-Beitritt bzw. -Austritt gepostet werden.',
         tag: 'Free',
         icon: iconCheck,
+        wikiHref: '/wiki/de/dokumentation/welcome/',
       },
       {
         title: 'Boost-Nachrichten',
@@ -88,6 +95,7 @@ const groups: ModuleGroup[] = [
         description: 'Live-Benachrichtigungen für Twitch, Kick und YouTube, sobald dein Streamer online geht.',
         tag: 'Free',
         icon: iconCheck,
+        wikiHref: '/wiki/de/dokumentation/stream-alerts/',
       },
     ],
   },
@@ -152,7 +160,16 @@ const tagStyles: Record<string, string> = {
                   )}
                 </div>
                 <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{feature.description}</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-grow">{feature.description}</p>
+                {feature.wikiHref && (
+                  <a
+                    href={resolvePath(feature.wikiHref)}
+                    class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                  >
+                    Mehr im Wiki
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  </a>
+                )}
               </div>
             ))}
           </div>
