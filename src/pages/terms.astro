@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { directus, readSingleton } from '../lib/directus';
+
+// Typ-Sicherheit & Fallback-Daten
+let termsData = {
+  title: "Nutzungsbedingungen",
+  last_updated: "2026-06-17",
+  content: "<p>Inhalte werden geladen...</p>"
+};
+
+try {
+  const data = await directus.request(readSingleton('terms_of_service'));
+  if (data) {
+    termsData = data;
+  }
+} catch (error) {
+  console.warn("Directus konnte für Terms nicht erreicht werden. Verwendet Fallback:", error);
+}
+
+// Datum sicher parsen
+let formattedDate = termsData.last_updated;
+try {
+  const parsedDate = new Date(termsData.last_updated);
+  if (!isNaN(parsedDate.getTime())) {
+    formattedDate = parsedDate.toLocaleDateString('de-DE', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+} catch (e) {
+  // Fallback, falls Date-Parsing fehlschlägt
+}
+---
+
+<BaseLayout title={termsData.title} description="Nutzungsbedingungen (Terms of Service) für Nexus.">
+  <div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-8">
+        {termsData.title}
+      </h1>
+      <div class="prose prose-slate dark:prose-invert max-w-none">
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-8">
+          Zuletzt aktualisiert: {formattedDate}
+        </p>
+
+        {/* Rendert das vollständige HTML aus Directus */}
+        <Fragment set:html={termsData.content} />
+      </div>
+    </div>
+  </div>
+</BaseLayout>

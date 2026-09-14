@@ -1,0 +1,76 @@
+---
+import { directus, readItems } from '../lib/directus';
+
+const fallbackFaqs = [
+  {
+    question: "Warum fordert die Einladung Administrator-Rechte an?",
+    answer: "Damit Nexus sofort auf allen Kanälen funktioniert, ohne dass du Channel-Rechte manuell anpassen musst. Du kannst den Haken beim Einladen aber auch entfernen und Berechtigungen manuell vergeben. Aus Sicherheitsgründen empfehlen wir ohnehin, die Rolle 'Nexus' in der Hierarchie nur knapp ÜBER deine Moderatoren-Rolle zu schieben, aber UNTER den Admins zu lassen. So kann der Bot perfekt moderieren, aber dein Server bleibt absolut sicher vor potenziellen Exploits."
+  },
+  {
+    question: "Ist der Bot wirklich komplett kostenlos?",
+    answer: "Ja, alle grundlegenden Kernfunktionen wie Leveling, Standard-Moderation und Reaktionsrollen sind zu 100 % kostenlos und ohne Paywall nutzbar. Unser geplantes Premium-Modell erweitert den Bot nur um kosmetische Extras oder Server-Erweiterungen - wir sperren keine Features weg."
+  },
+  {
+    question: "Werden meine Serverdaten oder Chatlogs verkauft?",
+    answer: "Niemals. Datenschutz ist der Hauptgrund, warum Nexus existiert. Wir tracken keine User profile übergreifend, wir verkaufen keine Daten an Broker und wir loggen nur das, was für die Funktionen (wie Moderation-Logs) zwingend notwendig ist. Sicher und transparent."
+  },
+  {
+    question: "Wie richte ich Nexus nach dem Einladen ein?",
+    answer: "Das ist kinderleicht: Tippe einfach auf deinem Server den Befehl '/setup' ein. Nexus führt dich Schritt für Schritt durch die Aktivierung der einzelnen Module. Alles läuft direkt über intuitive Slash-Commands."
+  },
+  {
+    question: "Kann ich einzelne Module (z. B. Leveling) komplett ausschalten?",
+    answer: "Ja, und das ist das Beste: Mit dem Befehl '/module' hast du die volle Kontrolle. Jedes Modul, das du deaktivierst, schläft komplett im Hintergrund. Kein Spam, keine ungenutzten Commands, kein Chaos."
+  }
+];
+
+let faqs = fallbackFaqs;
+
+try {
+  const remoteFaqs = await directus.request(
+    readItems('faqs', {
+      sort: ['sort'],
+      fields: ['question', 'answer']
+    })
+  );
+
+  if (remoteFaqs && remoteFaqs.length > 0) {
+    faqs = remoteFaqs;
+  }
+} catch (error) {
+  console.warn('Directus FAQ fetch failed, using fallback:', error);
+}
+---
+
+<section class="py-32 bg-white dark:bg-[#09090b] relative overflow-hidden">
+  <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+      <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
+        Frequently Asked <span class="text-primary-500">Questions</span>
+      </h2>
+      <p class="text-xl text-slate-600 dark:text-slate-400">
+        Wir spielen mit offenen Karten und beantworten <span class="text-gradient font-semibold">deine Fragen</span>.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group glass-panel rounded-2xl [&_summary::-webkit-details-marker]:hidden reveal-on-scroll" style={`transition-delay: ${index * 50}ms;`}>
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-slate-900 dark:text-white font-medium">
+            <h3 class="text-lg font-heading font-bold">{faq.question}</h3>
+            <span class="relative h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400 group-open:text-primary-600 dark:group-open:text-primary-400 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 h-5 w-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 h-5 w-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" set:html={faq.answer} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

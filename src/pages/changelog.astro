@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { directus, readItems } from '../lib/directus';
+
+let releases: any[] = [];
+
+try {
+  releases = await directus.request(
+    readItems('changelog', {
+      filter: { status: { _eq: 'published' } },
+      sort: ['-release_date'],
+      limit: 20
+    })
+  );
+} catch (error) {
+  console.warn("Directus Changelog konnte nicht geladen werden:", error);
+}
+
+// Datum formatieren
+const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toLocaleDateString('de-DE', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
+
+// Badges sauber in eine Liste aufteilen
+const parseBadges = (badgeField: any): string[] => {
+  if (Array.isArray(badgeField)) return badgeField;
+  if (typeof badgeField === 'string' && badgeField.trim().length > 0) {
+    try {
+      const parsed = JSON.parse(badgeField);
+      if (Array.isArray(parsed)) return parsed;
+    } catch {}
+    return badgeField.split(',').map((b) => b.trim());
+  }
+  return [];
+};
+
+const badgeConfig: Record<string, { label: string; class: string }> = {
+  feature: {
+    label: "🚀 Feature",
+    class: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+  },
+  fix: {
+    label: "🛠️ Bugfix",
+    class: "bg-amber-500/10 text-amber-400 border-amber-500/30"
+  },
+  security: {
+    label: "🛡️ Security",
+    class: "bg-rose-500/10 text-rose-400 border-rose-500/30"
+  },
+  major: {
+    label: "🌟 Major",
+    class: "bg-purple-500/10 text-purple-400 border-purple-500/30"
+  }
+};
+---
+
+<BaseLayout title="Changelog" description="Alle Updates und Release Notes für Nexus.">
+  <div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      
+      <!-- Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+          Changelog
+        </h1>
+        <p class="text-slate-600 dark:text-slate-400 text-lg">
+          Alle neuen Features, Verbesserungen und Bugfixes rund um Nexus auf einen Blick.
+        </p>
+      </div>
+
+      <!-- Release Entries -->
+      {releases.length === 0 ? (
+        <div class="text-center py-12 text-slate-500 dark:text-slate-400 bg-slate-900/40 border border-slate-800 rounded-2xl">
+          Aktuell sind noch keine Changelog-Einträge veröffentlicht.
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {releases.map((item: any) => (
+            <article class="bg-slate-900/60 border border-slate-800/80 hover:border-slate-700/80 rounded-2xl p-6 md:p-8 backdrop-blur-sm transition-colors shadow-sm">
+              
+              <!-- Top Row: Version, Badges & Datum -->
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-800/80">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <!-- Version Pill -->
+                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    {item.version}
+                  </span>
+
+                  <!-- Badges einzeln aufteilen -->
+                  {parseBadges(item.badge).map((bKey: string) => {
+                    const conf = badgeConfig[bKey.toLowerCase()] || {
+                      label: bKey,
+                      class: "bg-slate-800 text-slate-300 border-slate-700"
+                    };
+                    return (
+                      <span class={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${conf.class}`}>
+                        {conf.label}
+                      </span>
+                    );
+                  })}
+                </div>
+
+                <!-- Release Date -->
+                {item.release_date && (
+                  <time class="text-xs font-medium text-slate-400 sm:text-right">
+                    {formatDate(item.release_date)}
+                  </time>
+                )}
+              </div>
+
+              <!-- Title & Content -->
+              <div class="pt-6">
+                {item.title && (
+                  <h2 class="text-xl md:text-2xl font-bold text-white mb-4">
+                    {item.title}
+                  </h2>
+                )}
+
+                <!-- WYSIWYG Content aus Directus -->
+                <div class="prose prose-invert max-w-none 
+                  prose-h3:text-base prose-h3:font-semibold prose-h3:text-slate-200 prose-h3:mt-6 prose-h3:mb-2
+                  prose-p:text-slate-300 prose-p:leading-relaxed
+                  prose-ul:my-2 prose-li:text-slate-300 prose-li:my-1
+                  prose-code:text-emerald-400 prose-code:bg-slate-950/60 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+                  <Fragment set:html={item.content} />
+                </div>
+              </div>
+
+            </article>
+          ))}
+        </div>
+      )}
+
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,125 @@
+---
+import { DISCORD_INVITE_URL } from '../config';
+---
+
+<section id="features" class="py-32 bg-slate-50 dark:bg-[#0c0c0f] border-y border-slate-200 dark:border-slate-800 relative overflow-hidden">
+  <!-- Subtle dark background glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-200/50 via-transparent to-transparent dark:from-primary-900/10 dark:via-transparent dark:to-transparent"></div>
+
+  <div class="text-center max-w-3xl mx-auto mb-20 reveal-on-scroll">
+      <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
+        Alles was du brauchst. <br/><span class="text-primary-500">Ohne das übliche Bot-Chaos.</span>
+      </h2>
+      <p class="text-xl text-slate-600 dark:text-slate-400 font-sans">
+        Schluss mit überladenen Funktionen und versteckten Kosten. Nexus gibt dir die wichtigsten Tools für deinen Server – logisch aufgebaut, blitzschnell und absolut transparent.
+      </p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[minmax(260px,auto)_minmax(280px,auto)] gap-6 max-w-7xl mx-auto">
+
+      <!-- Feature 1: Large Span 2x2 -->
+      <div class="md:col-span-2 lg:row-span-2 glass-panel rounded-3xl p-8 flex flex-col hover-glow reveal-on-scroll relative overflow-hidden group min-h-[420px] lg:min-h-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400 rounded-2xl flex items-center justify-center mb-6 shadow-inner" set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`} />
+
+        <div class="z-10 flex flex-col flex-grow">
+          <h3 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mb-4">In 5 Schritten startklar.</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-lg font-bold mb-2">Kein manuelles Konfigurieren</p>
+          <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-8 flex-grow">
+            Sobald Nexus deinem Server beitritt, meldet er sich automatisch und führt dich durch ein interaktives Setup – direkt in Discord. Rollenprüfung, Log-Channel, Willkommensnachrichten: alles in fünf kurzen Schritten, ohne eine einzige Zeile zu tippen.
+          </p>
+        </div>
+
+        <!-- Decorative Code Block inside the Bento Box -->
+        <div class="relative w-full mt-auto pt-4">
+          <!-- Inner mock grid -->
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:24px_24px] z-0"></div>
+
+          <!-- Das interaktive Discord-Embed Mockup -->
+          <div class="relative z-10 p-6 rounded-2xl bg-[#1e1f22] border border-slate-800 text-left w-full transform transition-transform group-hover:scale-[1.01] duration-500 font-sans shadow-2xl">
+
+            <!-- Bot Header -->
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center font-bold text-slate-950 text-base shadow-lg shadow-primary-500/20">N</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-base">Nexus</span>
+                  <span class="bg-[#5865f2] text-white text-[10px] px-1.5 py-0.5 rounded font-medium tracking-wider uppercase">Bot</span>
+                </div>
+                <span class="text-xs text-slate-400">heute um 15:36 Uhr</span>
+              </div>
+            </div>
+
+            <!-- Discord Embed Box -->
+            <div class="flex bg-[#2b2d31] rounded-r border-l-4 border-primary-500 my-3 p-4">
+              <div class="flex-1">
+                <h3 class="text-white font-bold text-lg mb-1">👋 Hallo, ich bin Nexus!</h3>
+                <div class="text-[#dbdee1] text-sm leading-relaxed mb-4">
+                  <p>Ich helfe dir deinen Server zu verwalten.</p>
+                  <p>Klicke auf Setup starten um mich einzurichten.</p>
+                </div>
+
+                <!-- Zusatzinfos, die das Ganze lebendig machen -->
+                <div class="grid grid-cols-2 gap-4 mt-2 border-t border-slate-700/50 pt-3 text-xs">
+                  <div>
+                    <span class="block text-slate-400 font-bold uppercase tracking-wider text-[10px]">Modul</span>
+                    <span class="text-primary-400 font-medium">Setup</span>
+                  </div>
+                  <div>
+                    <span class="block text-slate-400 font-bold uppercase tracking-wider text-[10px]">Status</span>
+                    <span class="text-emerald-400 font-medium">Bereit • Aktiv</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Discord Buttons -->
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a
+                href={DISCORD_INVITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#248046] hover:bg-[#1a6535] text-white text-sm font-medium rounded transition-colors duration-200 no-underline"
+              >
+                🚀 Setup starten
+              </a>
+            </div>
+          </div> <!-- Ende Discord-Embed Mockup -->
+
+          <!-- Decorative background blur behind mockup -->
+          <div class="absolute -top-12 -left-12 -z-10 w-96 h-96 bg-primary-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[100px]"></div>
+          <div class="absolute -bottom-12 -right-12 -z-10 w-96 h-96 bg-accent-500/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[100px]"></div>
+        </div> <!-- Ende Dekorativer Bereich -->
+      </div> <!-- Ende Feature 1 (Bento Box) -->
+
+      <!-- Feature 2: Standard Span -->
+      <div class="glass-panel rounded-3xl p-8 flex flex-col hover-glow reveal-on-scroll min-h-[320px] lg:min-h-0" style="transition-delay: 100ms;">
+        <div class="w-12 h-12 bg-accent-100 dark:bg-accent-900/40 text-accent-600 dark:text-accent-400 rounded-2xl flex items-center justify-center mb-6" set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`} />
+        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3">Voller Fokus auf Fairness.</h3>
+        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Leveling, Moderation, Reaction Roles – alle Kernfeatures sind kostenlos, für immer. Unser Premium-Modell streicht keine Funktionen, sondern erweitert nur, was ohnehin schon da ist.
+        </p>
+      </div>
+
+      <!-- Feature 3: Standard Span -->
+      <div class="glass-panel rounded-3xl p-8 flex flex-col hover-glow reveal-on-scroll min-h-[320px] lg:min-h-0" style="transition-delay: 200ms;">
+        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6" set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`} />
+        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3">Aktivität, die belohnt wird.</h3>
+        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Nexus vergibt vollautomatisch XP für Chat-Aktivität und weist bei Level-Aufstiegen neue Rollen zu. So bleibt dein Server lebendig, ohne dass du auch nur einen Finger rühren musst.
+        </p>
+      </div>
+
+      <!-- Feature 4: Horizontal Span -->
+      <div class="md:col-span-2 lg:col-start-3 lg:row-start-2 glass-panel rounded-3xl p-8 flex flex-col sm:flex-row items-center gap-8 hover-glow reveal-on-scroll min-h-[280px] lg:min-h-0" style="transition-delay: 300ms;">
+        <div class="flex-grow">
+          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6" set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`} />
+          <h3 class="text-2xl font-heading font-bold text-slate-900 dark:text-white mb-3">Volle Kontrolle per Mausklick.</h3>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            Aktiviere oder deaktiviere einzelne Module blitzschnell mit dem /module-Befehl. Was du nicht einschaltest, bleibt komplett unsichtbar. Kein Befehls-Chaos auf dem Server und keine nervigen Bot-Spams im Chat.
+          </p>
+        </div>
+      </div>
+    </div>
+</section>

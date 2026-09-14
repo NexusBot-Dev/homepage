@@ -1,0 +1,175 @@
+---
+import Button from './Button.astro';
+import Badge from './Badge.astro';
+import { resolvePath } from '../utils/navigation';
+import { DISCORD_INVITE_URL } from '../config';
+---
+
+<section class="relative pt-32 pb-32 lg:pt-48 lg:pb-40 overflow-hidden">
+  <div class="absolute inset-0 -z-10 bg-white dark:bg-[#09090b]">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+CjxyZWN0IHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMSIgZmlsbD0icmdiYSgwLDAsMCwwLjA1KSI+PC9jaXJjbGU+Cjwvc3ZnPg==')] dark:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+CjxyZWN0IHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjE1KSI+PC9jaXJjbGU+Cjwvc3ZnPg==')] [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+    <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[600px] bg-primary-400/20 dark:bg-primary-900/30 rounded-full blur-[120px] opacity-80 mix-blend-multiply dark:mix-blend-screen animate-pulse"></div>
+    <div class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[500px] bg-accent-400/20 dark:bg-accent-900/30 rounded-full blur-[100px] opacity-80 mix-blend-multiply dark:mix-blend-screen"></div>
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-on-scroll">
+    <h1 class="text-6xl sm:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight text-slate-900 dark:text-white mb-8 max-w-5xl mx-auto leading-[1.1]">
+      Der moderne Bot für <span class="text-primary-500">deine Community.</span>
+    </h1>
+
+    <p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-12 max-w-4xl mx-auto font-sans leading-relaxed">
+      Nexus brings Leveling, Moderation und Reaction Roles auf deinen Server - blitzschnell per Knopfdruck, garantiert ohne nervige Paywalls und zu 100% datenschutzfreundlich in Deutschland gehostet.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 w-full max-w-md mx-auto sm:max-w-none">
+      <a
+        href={DISCORD_INVITE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-lg bg-primary-500 hover:bg-primary-600 text-slate-950 font-bold px-8 py-4 rounded-xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-primary-500/20"
+      >
+        Nexus einladen
+      </a>
+      <Button href="#features" variant="outline" size="lg" class="w-full sm:w-auto text-lg px-8 py-4 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+        Features entdecken
+      </Button>
+    </div>
+
+<!-- Complex Mockup Image Area -->
+    <div class="relative mx-auto max-w-6xl reveal-on-scroll w-full" style="transition-delay: 200ms;">
+      <!-- Das Hauptfenster -->
+      <div class="w-full h-auto py-12 md:py-0 md:aspect-[16/9] rounded-3xl shadow-2xl border border-slate-800/60 flex relative overflow-hidden group select-none" style="background-color: #313338;">
+
+        <!-- Mac window dots -->
+        <div class="absolute top-4 left-4 flex gap-2 z-30">
+          <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+        </div>
+        
+        <!-- Glow Effekt -->
+        <div class="absolute right-12 md:right-24 lg:right-48 top-1/4 w-[300px] md:w-[450px] h-[220px] bg-primary-500/10 rounded-full blur-[100px] z-0 transform group-hover:scale-125 group-hover:bg-primary-500/15 transition-all duration-700"></div>
+
+        <div class="w-60 border-r border-[#1e1f22]/50 pt-16 px-3 pb-4 hidden md:flex flex-col gap-4 z-15 flex-shrink-0 text-left" style="background-color: #2b2d31;">
+          <div class="flex gap-2 items-center pb-3 border-b border-[#1e1f22]/40">
+            <div class="w-7 h-7 rounded-full bg-[#313338] flex items-center justify-center font-bold text-slate-200 text-xs shadow-inner">N</div>
+            <span class="text-white font-semibold text-sm font-sans tracking-wide">Nexus</span>
+          </div>
+          
+          <div class="space-y-0.5 mt-1">
+            <div class="h-8 w-full hover:bg-[#35373c] rounded flex items-center px-2 text-sm text-[#949ba4] font-medium transition-colors cursor-default">
+              <span class="text-slate-500 mr-2 text-sm font-sans">#</span> 💬-general
+            </div>
+            <div class="h-8 w-full rounded flex items-center px-2 text-sm text-white font-semibold border-l-2 border-primary-500 cursor-default" style="background-color: #35373c;">
+              <span class="text-primary-400 mr-2 text-sm font-sans">#</span> ⚔️-fraktionswahl
+            </div>
+            <div class="h-8 w-full hover:bg-[#35373c] rounded flex items-center px-2 text-sm text-[#949ba4] font-medium transition-colors cursor-default">
+              <span class="text-slate-500 mr-2 text-sm font-sans">#</span> 📑-regeln
+            </div>
+          </div>
+        </div>
+
+        <!-- CHAT-BEREICH -->
+        <div class="flex-1 flex items-center justify-center lg:justify-end p-4 sm:p-6 md:pr-12 lg:pr-20 pt-16 md:pt-0 z-20">
+          
+          <!-- Das Discord Embed Fenster-->
+            <!-- relative z-10 <div class="rounded-2xl border border-slate-800/60 p-5 md:p-6 text-left w-full max-w-xl transform transition-all group-hover:scale-[1.012] group-hover:border-primary-500/20 duration-500 font-sans shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)]"> -->
+            <div class="p-5 md:p-6 rounded-2xl bg-[#1e1f22] border border-slate-800/60 text-left w-full max-w-xl transform transition-all group-hover:scale-[1.012] group-hover:border-primary-500/20 duration-500 font-sans shadow-2xl">
+            <!-- Identity Header -->
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center font-bold text-slate-950 text-base shadow-lg shadow-primary-500/20">N</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-base">Nexus</span>
+                  <span class="bg-[#5865f2] text-white text-[10px] px-1.5 py-0.5 rounded font-medium tracking-wider uppercase">Bot</span>
+                </div>
+                <span class="text-xs text-slate-400">heute um 15:36 Uhr</span>
+              </div>
+            </div>
+            
+            <!-- Embed Nachricht -->
+            <div class="flex rounded-r border-l-4 border-primary-500 my-3 p-3 md:p-4" style="background-color: #2b2d31;">
+              <div class="flex-1">
+                <h3 class="text-white font-bold text-base md:text-lg mb-1">⚔️ Wähle deine Fraktion!</h3>
+                <p class="text-[#dbdee1] text-xs md:text-sm leading-relaxed mb-4">
+                  Willkommen auf dem Community-Server! Wähle unten im Dropdown-Menü deine gewünschte Fraktion aus, um dir automatisch deine Rolle zuzuweisen und die geheimen Channels freizuschalten.
+                </p>
+                
+                <!-- Module Specs -->
+                <div class="grid grid-cols-2 gap-2 md:gap-4 mt-2 border-t border-[#1e1f22]/60 pt-3 text-[11px] md:text-xs">
+                  <div>
+                    <span class="block text-[#949ba4] font-bold uppercase tracking-wider text-[9px] md:text-[10px]">Modul</span>
+                    <span class="text-primary-400 font-medium whitespace-nowrap">Reaction Roles</span>
+                  </div>
+                  <div>
+                    <span class="block text-[#949ba4] font-bold uppercase tracking-wider text-[9px] md:text-[10px]">Status</span>
+                    <span class="text-emerald-400 font-medium">Bereit • Aktiv</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Discord Dropdown Menü -->
+            <div class="mt-4 space-y-1 relative w-full">
+              
+              <!-- Geschlossenes Feld -->
+              <div class="w-full bg-[#111214] border border-[#111214] rounded py-2 px-3 flex items-center justify-between text-[#dbdee1] text-xs md:text-sm cursor-default">
+                <div class="flex items-center gap-2">
+                  <span class="text-[#949ba4] text-sm md:text-base">🛡️</span>
+                  <span class="font-medium text-[#f2f3f5]">Wähle Fraktion aus</span>
+                </div>
+                <svg class="w-4 h-4 text-[#949ba4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+
+              <!-- Geöffnete Optionen -->
+              <div class="w-full bg-[#111214] border border-[#1c1d1f] rounded shadow-2xl p-1 space-y-0.5">
+                
+                <!-- Allianz -->
+                <div class="flex items-center justify-between p-2 rounded hover:bg-[#2b2d31] text-xs md:text-sm cursor-default transition-colors duration-150 group/item" style="background-color: rgba(43, 45, 49, 0.4);">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm md:text-base">🔴</span>
+                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">Allianz</span>
+                    <span class="text-[10px] md:text-[11px] text-[#72767d] font-mono bg-[#1e1f22] px-1 rounded">(0)</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-primary-500 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+
+                <!-- Horde -->
+                <div class="flex items-center justify-between p-2 rounded hover:bg-[#2b2d31] text-xs md:text-sm cursor-default transition-colors duration-150 group/item" style="background-color: rgba(43, 45, 49, 0.4);">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm md:text-base">🔵</span>
+                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">Horde</span>
+                    <span class="text-[10px] md:text-[11px] text-[#72767d] font-mono bg-[#1e1f22] px-1 rounded">(0)</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-primary-500 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+
+                <!-- Neutral -->
+                <div class="flex items-center justify-between p-2 rounded hover:bg-[#2b2d31] text-xs md:text-sm cursor-default transition-colors duration-150 group/item" style="background-color: rgba(43, 45, 49, 0.4);">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm md:text-base">⚪</span>
+                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">Neutral</span>
+                    <span class="text-[10px] md:text-[11px] text-[#72767d] font-mono bg-[#1e1f22] px-1 rounded">(1)</span>
+                  </div>
+                  <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-primary-500 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+import { directus, readItems } from '../../lib/directus';
+
+let targetUrl = '/404';
+
+try {
+  const categories = await directus.request(
+    readItems('doc_categories', {
+      sort: ['sort'],
+      fields: ['id', 'slug']
+    })
+  );
+
+  const articles = await directus.request(
+    readItems('doc_articles', {
+      filter: { status: { _eq: 'published' } },
+      sort: ['sort'],
+      fields: ['id', 'slug', 'category']
+    })
+  );
+
+  if (categories.length > 0 && articles.length > 0) {
+    const firstArticle = articles[0];
+    
+    const catId = typeof firstArticle.category === 'object' && firstArticle.category !== null
+      ? (firstArticle.category.id || firstArticle.category.doc_categories_id)
+      : firstArticle.category;
+
+    const matchedCategory = categories.find((c: any) => String(c.id) === String(catId)) || categories[0];
+
+    targetUrl = `/wiki/de/${matchedCategory.slug}/${firstArticle.slug}`;
+  }
+} catch (error) {
+  console.error("Wiki Index Redirect Error:", error);
+}
+
+targetUrl = '/wiki/de/start/start/'
+return Astro.redirect(targetUrl, 302);
+---
