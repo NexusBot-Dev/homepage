@@ -54,12 +54,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   <td class="p-4 text-xs">Bei Verlassen/Kick/Ban; auf Anfrage über Lösch-Funktion</td>
                 </tr>
                 <tr class="hover:bg-[#2b2d31]/30 transition-colors">
-                  <td class="p-4 font-semibold text-slate-900 dark:text-white">Nexus Coins (virtuelle Punkte)</td>
-                  <td class="p-4">Bereitstellung optionaler Spielfunktionen ohne Geldwert</td>
-                  <td class="p-4 text-xs font-mono text-primary-500 dark:text-primary-400">MariaDB, serverbezogen</td>
-                  <td class="p-4 text-xs">Bei Verlassen/Kick/Ban; auf Anfrage über Lösch-Funktion</td>
-                </tr>
-                <tr class="hover:bg-[#2b2d31]/30 transition-colors">
                   <td class="p-4 font-semibold text-slate-900 dark:text-white">Verwarnungen (Warnings)</td>
                   <td class="p-4">Moderationszweck / Nachvollziehbarkeit von Verstößen für Server-Moderatoren</td>
                   <td class="p-4 text-xs font-mono text-primary-500 dark:text-primary-400">MariaDB, serverbezogen</td>
@@ -145,14 +139,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <h2>6. Automatisierte Löschroutinen</h2>
         <ul>
-          <li>Verlässt ein Nutzer einen Server (oder wird gekickt/gebannt), werden Level-, Coins- und Warning-Daten dieses Nutzers für diesen Server automatisch gelöscht.</li>
-          <li>Wird der Bot von einem Server entfernt, werden sämtliche serverbezogenen Daten (Einstellungen, Level, Warnungen, Coins, Reaktionsrollen) nach 7 Tagen automatisiert vollständig gelöscht, sofern der Bot nicht erneut hinzugefügt wird.</li>
+          <li>Verlässt ein Nutzer einen Server (oder wird gekickt/gebannt), werden Level- und Warning-Daten dieses Nutzers für diesen Server automatisch gelöscht.</li>
+          <li>Wird der Bot von einem Server entfernt, werden sämtliche serverbezogenen Daten (Einstellungen, Level, Warnungen, Reaktionsrollen) nach 7 Tagen automatisiert vollständig gelöscht, sofern der Bot nicht erneut hinzugefügt wird.</li>
           <li>Tritt der Bot innerhalb dieser 7 Tage demselben Server erneut bei, kann der Administrator wählen, die bestehende Konfiguration wiederherzustellen oder neu zu beginnen.</li>
         </ul>
         <h2>7. Auskunfts- und Löschrechte der Nutzer</h2>
         <p>Endnutzer (Mitglieder eines Discord-Servers, auf dem Nexus aktiv ist) haben folgende Selbstbedienungsoption:</p>
         <ul>
-          <li>Befehl „/delete_my_data“: löscht Level-/XP-Daten und Coins-Daten des aufrufenden Nutzers auf dem jeweiligen Server sofort. Warnungen bleiben aus den unter Punkt 5 genannten Gründen bestehen.</li>
+          <li>Befehl „/delete_my_data“: löscht Level-/XP-Daten des aufrufenden Nutzers auf dem jeweiligen Server sofort. Warnungen bleiben aus den unter Punkt 5 genannten Gründen bestehen.</li>
         </ul>
         <h2>8. Nutzung des Web-Dashboards & Discord OAuth2</h2>
         <p>
