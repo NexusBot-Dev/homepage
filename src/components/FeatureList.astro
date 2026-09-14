@@ -13,9 +13,9 @@ const t = useTranslations(lang);
 const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>`;
 
 const wikiHrefsByGroup: (string | undefined)[][] = [
-  ['/de/wiki/dokumentation/moderation/', '/de/wiki/dokumentation/automod/', undefined],
-  ['/de/wiki/dokumentation/leveling/', undefined, '/de/wiki/dokumentation/welcome/', undefined],
-  [undefined, undefined, '/de/wiki/dokumentation/stream-alerts/'],
+  [`/${lang}/wiki/dokumentation/moderation/`, `/${lang}/wiki/dokumentation/automod/`, undefined],
+  [`/${lang}/wiki/dokumentation/leveling/`, undefined, `/${lang}/wiki/dokumentation/welcome/`, undefined],
+  [undefined, undefined, `/${lang}/wiki/dokumentation/stream-alerts/`],
   [undefined, undefined, undefined],
 ];
 
