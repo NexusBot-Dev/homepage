@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { DISCORD_SUPPORT_SERVER } from '../config';
+import { useTranslations, DEFAULT_LANG } from '../i18n';
 
 const { lang: rawLang } = Astro.params;
 const lang = rawLang ?? DEFAULT_LANG;
@@ -30,7 +31,7 @@ const t = useTranslations(lang);
             href={DISCORD_SUPPORT_SERVER}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg border border-primary-400 text-white hover:bg-primary-700/50 transition-colors w-fit"
+            class="text-primary-400 hover:text-primary-300 underline underline-offset-2 transition-colors"
           >
             {t.cta.supportButton}
           </a>
