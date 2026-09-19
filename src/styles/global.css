@@ -109,3 +109,9 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
