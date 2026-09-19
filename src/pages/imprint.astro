@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { DISCORD_SUPPORT_SERVER } from '../config';
+
+const { lang: rawLang } = Astro.params;
+const lang = rawLang ?? DEFAULT_LANG;
+const t = useTranslations(lang);
 ---
 
 <BaseLayout title="Impressum">
@@ -9,7 +13,7 @@ import { DISCORD_SUPPORT_SERVER } from '../config';
     
     <div class="prose prose-invert max-w-none space-y-6 text-slate-300">
       <div>
-        <h2 class="text-xl font-bold text-white mb-2">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)/h2>
+        <h2 class="text-xl font-bold text-white mb-2">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)</h2>
         <p>
           Andreas Lindner<br />
           Holunderweg 4<br />
@@ -26,7 +30,7 @@ import { DISCORD_SUPPORT_SERVER } from '../config';
             href={DISCORD_SUPPORT_SERVER}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-xl border-2 border-primary-400 text-white hover:bg-primary-700 dark:hover:bg-primary-800 transition-colors"
+            class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg border border-primary-400 text-white hover:bg-primary-700/50 transition-colors w-fit"
           >
             {t.cta.supportButton}
           </a>
