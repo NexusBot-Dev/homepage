@@ -12,12 +12,12 @@ const localizedStaticPaths: string[] = [
   '/',
   '/features/',
   '/wiki/',
+  '/terms/',
 ];
 
 const unlocalizedStaticEntries: SitemapEntry[] = [
   { path: '/privacy/' },
   { path: '/imprint/' },
-  { path: '/terms/' },
   { path: '/changelog/' },
 ];
 

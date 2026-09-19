@@ -1,7 +1,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { DEFAULT_LANG, isSupportedLang } from './i18n/config';
 
-const UNPREFIXED_PASSTHROUGH = ['imprint', 'privacy', 'terms', 'changelog', '404'];
+const UNPREFIXED_PASSTHROUGH = ['imprint', 'privacy', 'changelog', '404'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;

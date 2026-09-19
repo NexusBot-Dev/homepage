@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { directus, readSingleton } from '../../lib/directus';
+
+const { lang: rawLang } = Astro.params;
+const lang = (rawLang || 'de').toLowerCase();
+
+// Typ-Sicherheit & Fallback-Daten
+let termsData = {
+  title: "Nutzungsbedingungen",
+  last_updated: "2026-06-17",
+  content: "<p>Inhalte werden geladen...</p>"
+};
+
+const getTranslation = (item: any, targetLang: string) => {
+  if (!item) return null;
+  const translations = Array.isArray(item.translations) ? item.translations : [];
+
+  const matched = translations.find((t: any) => {
+    const rawCode = typeof t.languages_code === 'object' && t.languages_code !== null
+      ? (t.languages_code.code || t.languages_code.id)
+      : t.languages_code;
+
+    const code = String(rawCode || '').toLowerCase();
+    const target = targetLang.toLowerCase();
+
+    return code === target || code.startsWith(`${target}-`) || target.startsWith(`${code}-`);
+  });
+
+  return {
+    ...item,
+    title: (matched && matched.title) ? matched.title : item.title || '',
+    content: (matched && matched.content) ? matched.content : item.content || ''
+  };
+};
+
+try {
+  const data = await directus.request(readSingleton('terms_of_service', {
+    fields: ['*', 'translations.*', 'translations.languages_code.*']
+  }));
+  if (data) {
+    termsData = getTranslation(data, lang) as typeof termsData;
+  }
+} catch (error) {
+  console.warn("Directus konnte für Terms nicht erreicht werden. Verwendet Fallback:", error);
+}
+
+// Datum sicher parsen
+let formattedDate = termsData.last_updated;
+try {
+  const parsedDate = new Date(termsData.last_updated);
+  if (!isNaN(parsedDate.getTime())) {
+    formattedDate = parsedDate.toLocaleDateString(lang === 'en' ? 'en-US' : 'de-DE', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+} catch (e) {
+  // Fallback, falls Date-Parsing fehlschlägt
+}
+---
+
+<BaseLayout title={termsData.title} description="Nutzungsbedingungen (Terms of Service) für Nexus.">
+  <div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-8">
+        {termsData.title}
+      </h1>
+      <div class="prose prose-slate dark:prose-invert max-w-none">
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-8">
+          {lang === 'en' ? 'Last updated:' : 'Zuletzt aktualisiert:'} {formattedDate}
+        </p>
+
+        {/* Rendert das vollständige HTML aus Directus */}
+        <Fragment set:html={termsData.content} />
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -23,7 +23,7 @@ export function resolvePath(path: string) {
   return path;
 }
 
-const UNPREFIXED_ROUTES = ['/imprint', '/privacy', '/terms'];
+const UNPREFIXED_ROUTES = ['/imprint', '/privacy'];
 
 export function localizedPath(lang: string, path: string) {
   if (path.startsWith('http') || path.startsWith('#')) {
