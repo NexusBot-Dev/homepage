@@ -246,6 +246,38 @@ export const de: Dictionary = {
     },
     fullListLink: 'Alle Features im Detail ansehen',
   },
+  changelog: {
+    pageTitle: 'Changelog',
+    subtitle: 'Alle neuen Features, Verbesserungen und Bugfixes rund um Nexus auf einen Blick.',
+    emptyState: 'Aktuell sind noch keine Changelog-Einträge veröffentlicht.',
+  },
+  faq: {
+    heading: 'Frequently Asked',
+    headingHighlight: 'Questions',
+    subtitle: 'Wir spielen mit offenen Karten und beantworten deine Fragen.',
+    fallback: [
+      {
+        question: 'Warum fordert die Einladung Administrator-Rechte an?',
+        answer: "Damit Nexus sofort auf allen Kanälen funktioniert, ohne dass du Channel-Rechte manuell anpassen musst. Du kannst den Haken beim Einladen aber auch entfernen und Berechtigungen manuell vergeben. Aus Sicherheitsgründen empfehlen wir ohnehin, die Rolle 'Nexus' in der Hierarchie nur knapp ÜBER deine Moderatoren-Rolle zu schieben, aber UNTER den Admins zu lassen. So kann der Bot perfekt moderieren, aber dein Server bleibt absolut sicher vor potenziellen Exploits.",
+      },
+      {
+        question: 'Ist der Bot wirklich komplett kostenlos?',
+        answer: 'Ja, alle grundlegenden Kernfunktionen wie Leveling, Standard-Moderation und Reaktionsrollen sind zu 100 % kostenlos und ohne Paywall nutzbar. Unser geplantes Premium-Modell erweitert den Bot nur um kosmetische Extras oder Server-Erweiterungen - wir sperren keine Features weg.',
+      },
+      {
+        question: 'Werden meine Serverdaten oder Chatlogs verkauft?',
+        answer: 'Niemals. Datenschutz ist der Hauptgrund, warum Nexus existiert. Wir tracken keine User profile übergreifend, wir verkaufen keine Daten an Broker und wir loggen nur das, was für die Funktionen (wie Moderation-Logs) zwingend notwendig ist. Sicher und transparent.',
+      },
+      {
+        question: 'Wie richte ich Nexus nach dem Einladen ein?',
+        answer: "Das ist kinderleicht: Tippe einfach auf deinem Server den Befehl '/setup' ein. Nexus führt dich Schritt für Schritt durch die Aktivierung der einzelnen Module. Alles läuft direkt über intuitive Slash-Commands.",
+      },
+      {
+        question: 'Kann ich einzelne Module (z. B. Leveling) komplett ausschalten?',
+        answer: "Ja, und das ist das Beste: Mit dem Befehl '/module' hast du die volle Kontrolle. Jedes Modul, das du deaktivierst, schläft komplett im Hintergrund. Kein Spam, keine ungenutzten Commands, kein Chaos.",
+      },
+    ],
+  },
   common: {
     invite: 'Nexus einladen',
   },

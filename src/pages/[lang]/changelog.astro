@@ -1,24 +1,55 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { directus, readItems } from '../lib/directus';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { directus, readItems } from '../../lib/directus';
+import { useTranslations } from '../../i18n';
+
+const { lang: rawLang } = Astro.params;
+const lang = (rawLang || 'de').toLowerCase();
+const t = useTranslations(lang);
 
 let releases: any[] = [];
 
+// Gleiche Mapping-Logik wie im Wiki/Terms: title & content pro Sprache aus
+// der translations-Relation, alles andere (version, badge, release_date)
+// ist sprachneutral und bleibt unverändert.
+const getTranslation = (item: any, targetLang: string) => {
+  const translations = Array.isArray(item.translations) ? item.translations : [];
+
+  const matched = translations.find((tr: any) => {
+    const rawCode = typeof tr.languages_code === 'object' && tr.languages_code !== null
+      ? (tr.languages_code.code || tr.languages_code.id)
+      : tr.languages_code;
+
+    const code = String(rawCode || '').toLowerCase();
+    const target = targetLang.toLowerCase();
+
+    return code === target || code.startsWith(`${target}-`) || target.startsWith(`${code}-`);
+  });
+
+  return {
+    ...item,
+    title: (matched && matched.title) ? matched.title : item.title || '',
+    content: (matched && matched.content) ? matched.content : item.content || '',
+  };
+};
+
 try {
-  releases = await directus.request(
+  const rawReleases = await directus.request(
     readItems('changelog', {
       filter: { status: { _eq: 'published' } },
       sort: ['-release_date'],
-      limit: 20
+      limit: 20,
+      fields: ['*', 'translations.*', 'translations.languages_code.*']
     })
   );
+  releases = rawReleases.map((item: any) => getTranslation(item, lang));
 } catch (error) {
   console.warn("Directus Changelog konnte nicht geladen werden:", error);
 }
 
 // Datum formatieren
 const formatDate = (dateStr: string) => {
-  return new Date(dateStr).toLocaleDateString('de-DE', {
+  return new Date(dateStr).toLocaleDateString(lang === 'en' ? 'en-US' : 'de-DE', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
@@ -58,24 +89,24 @@ const badgeConfig: Record<string, { label: string; class: string }> = {
 };
 ---
 
-<BaseLayout title="Changelog" description="Alle Updates und Release Notes für Nexus.">
+<BaseLayout title={t.changelog.pageTitle} description="Alle Updates und Release Notes für Nexus.">
   <div class="py-16 md:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
       
       <!-- Header -->
       <div class="text-center max-w-2xl mx-auto mb-16">
         <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-          Changelog
+          {t.changelog.pageTitle}
         </h1>
         <p class="text-slate-600 dark:text-slate-400 text-lg">
-          Alle neuen Features, Verbesserungen und Bugfixes rund um Nexus auf einen Blick.
+          {t.changelog.subtitle}
         </p>
       </div>
 
       <!-- Release Entries -->
       {releases.length === 0 ? (
         <div class="text-center py-12 text-slate-500 dark:text-slate-400 bg-slate-900/40 border border-slate-800 rounded-2xl">
-          Aktuell sind noch keine Changelog-Einträge veröffentlicht.
+          {t.changelog.emptyState}
         </div>
       ) : (
         <div class="space-y-8">

@@ -1,41 +1,46 @@
 ---
 import { directus, readItems } from '../lib/directus';
+import { useTranslations } from '../i18n';
 
-const fallbackFaqs = [
-  {
-    question: "Warum fordert die Einladung Administrator-Rechte an?",
-    answer: "Damit Nexus sofort auf allen Kanälen funktioniert, ohne dass du Channel-Rechte manuell anpassen musst. Du kannst den Haken beim Einladen aber auch entfernen und Berechtigungen manuell vergeben. Aus Sicherheitsgründen empfehlen wir ohnehin, die Rolle 'Nexus' in der Hierarchie nur knapp ÜBER deine Moderatoren-Rolle zu schieben, aber UNTER den Admins zu lassen. So kann der Bot perfekt moderieren, aber dein Server bleibt absolut sicher vor potenziellen Exploits."
-  },
-  {
-    question: "Ist der Bot wirklich komplett kostenlos?",
-    answer: "Ja, alle grundlegenden Kernfunktionen wie Leveling, Standard-Moderation und Reaktionsrollen sind zu 100 % kostenlos und ohne Paywall nutzbar. Unser geplantes Premium-Modell erweitert den Bot nur um kosmetische Extras oder Server-Erweiterungen - wir sperren keine Features weg."
-  },
-  {
-    question: "Werden meine Serverdaten oder Chatlogs verkauft?",
-    answer: "Niemals. Datenschutz ist der Hauptgrund, warum Nexus existiert. Wir tracken keine User profile übergreifend, wir verkaufen keine Daten an Broker und wir loggen nur das, was für die Funktionen (wie Moderation-Logs) zwingend notwendig ist. Sicher und transparent."
-  },
-  {
-    question: "Wie richte ich Nexus nach dem Einladen ein?",
-    answer: "Das ist kinderleicht: Tippe einfach auf deinem Server den Befehl '/setup' ein. Nexus führt dich Schritt für Schritt durch die Aktivierung der einzelnen Module. Alles läuft direkt über intuitive Slash-Commands."
-  },
-  {
-    question: "Kann ich einzelne Module (z. B. Leveling) komplett ausschalten?",
-    answer: "Ja, und das ist das Beste: Mit dem Befehl '/module' hast du die volle Kontrolle. Jedes Modul, das du deaktivierst, schläft komplett im Hintergrund. Kein Spam, keine ungenutzten Commands, kein Chaos."
-  }
-];
+interface Props {
+  lang: string;
+}
 
-let faqs = fallbackFaqs;
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+let faqs: { question: string; answer: string }[] = t.faq.fallback;
+
+const getTranslation = (item: any, targetLang: string) => {
+  const translations = Array.isArray(item.translations) ? item.translations : [];
+
+  const matched = translations.find((tr: any) => {
+    const rawCode = typeof tr.languages_code === 'object' && tr.languages_code !== null
+      ? (tr.languages_code.code || tr.languages_code.id)
+      : tr.languages_code;
+
+    const code = String(rawCode || '').toLowerCase();
+    const target = targetLang.toLowerCase();
+
+    return code === target || code.startsWith(`${target}-`) || target.startsWith(`${code}-`);
+  });
+
+  return {
+    question: (matched && matched.question) ? matched.question : item.question || '',
+    answer: (matched && matched.answer) ? matched.answer : item.answer || '',
+  };
+};
 
 try {
   const remoteFaqs = await directus.request(
     readItems('faqs', {
       sort: ['sort'],
-      fields: ['question', 'answer']
+      fields: ['question', 'answer', 'translations.*', 'translations.languages_code.*']
     })
   );
 
   if (remoteFaqs && remoteFaqs.length > 0) {
-    faqs = remoteFaqs;
+    faqs = remoteFaqs.map((item: any) => getTranslation(item, lang));
   }
 } catch (error) {
   console.warn('Directus FAQ fetch failed, using fallback:', error);
@@ -47,10 +52,10 @@ try {
     
     <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
       <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
-        Frequently Asked <span class="text-primary-500">Questions</span>
+        {t.faq.heading} <span class="text-primary-500">{t.faq.headingHighlight}</span>
       </h2>
       <p class="text-xl text-slate-600 dark:text-slate-400">
-        Wir spielen mit offenen Karten und beantworten <span class="text-gradient font-semibold">deine Fragen</span>.
+        {t.faq.subtitle}
       </p>
     </div>
 

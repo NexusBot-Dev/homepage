@@ -246,6 +246,38 @@ export const en: Dictionary = {
     },
     fullListLink: 'See all features in detail',
   },
+  changelog: {
+    pageTitle: 'Changelog',
+    subtitle: 'All new features, improvements and bug fixes around Nexus, at a glance.',
+    emptyState: 'No changelog entries have been published yet.',
+  },
+  faq: {
+    heading: 'Frequently Asked',
+    headingHighlight: 'Questions',
+    subtitle: 'We play with an open hand and answer your questions.',
+    fallback: [
+      {
+        question: 'Why does the invite request Administrator permissions?',
+        answer: "So Nexus works right away across all channels, without you having to adjust channel permissions manually. You can uncheck that box when inviting and grant permissions manually instead. For security, we recommend placing the 'Nexus' role just ABOVE your moderator role in the hierarchy, but BELOW admins. That way the bot can moderate perfectly while your server stays fully protected from potential exploits.",
+      },
+      {
+        question: 'Is the bot really completely free?',
+        answer: 'Yes, all core functions like leveling, standard moderation and reaction roles are 100% free with no paywall. Our planned Premium model only adds cosmetic extras or server enhancements \u2013 we never lock features away.',
+      },
+      {
+        question: 'Is my server data or chat log ever sold?',
+        answer: 'Never. Privacy is the main reason Nexus exists. We don\u2019t track user profiles across servers, we don\u2019t sell data to brokers, and we only log what\u2019s strictly necessary for features like moderation logs. Safe and transparent.',
+      },
+      {
+        question: 'How do I set up Nexus after inviting it?',
+        answer: "It's easy: just run the '/setup' command on your server. Nexus walks you through activating each module step by step, all through intuitive slash commands.",
+      },
+      {
+        question: 'Can I completely disable individual modules (e.g. leveling)?',
+        answer: "Yes, and that's the best part: the '/module' command gives you full control. Any module you disable goes fully dormant in the background. No spam, no unused commands, no clutter.",
+      },
+    ],
+  },
   common: {
     invite: 'Invite Nexus',
   },

@@ -119,6 +119,17 @@ export interface Dictionary {
     card4: { title: string; description: string };
     fullListLink: string;
   };
+  changelog: {
+    pageTitle: string;
+    subtitle: string;
+    emptyState: string;
+  };
+  faq: {
+    heading: string;
+    headingHighlight: string;
+    subtitle: string;
+    fallback: { question: string; answer: string }[];
+  };
   common: {
     invite: string;
   };
