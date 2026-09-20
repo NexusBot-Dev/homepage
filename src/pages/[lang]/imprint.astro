@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { directus, readSingleton } from '../../lib/directus';
+import { useTranslations, DEFAULT_LANG } from '../../i18n';
+
+const { lang: rawLang } = Astro.params;
+const lang = (rawLang || DEFAULT_LANG).toLowerCase();
+const t = useTranslations(lang);
+
+let pageData = {
+  title: 'Impressum',
+  content: '<p>Inhalte werden geladen...</p>'
+};
+
+const getTranslation = (item: any, targetLang: string) => {
+  const translations = Array.isArray(item.translations) ? item.translations : [];
+
+  const matched = translations.find((tr: any) => {
+    const rawCode = typeof tr.languages_code === 'object' && tr.languages_code !== null
+      ? (tr.languages_code.code || tr.languages_code.id)
+      : tr.languages_code;
+
+    const code = String(rawCode || '').toLowerCase();
+    const target = targetLang.toLowerCase();
+
+    return code === target || code.startsWith(`${target}-`) || target.startsWith(`${code}-`);
+  });
+
+  return {
+    title: (matched && matched.title) ? matched.title : item.title || '',
+    content: (matched && matched.content) ? matched.content : item.content || '',
+  };
+};
+
+try {
+  const data = await directus.request(readSingleton('imprint', {
+    fields: ['*', 'translations.*', 'translations.languages_code.*']
+  }));
+  if (data) {
+    const translated = getTranslation(data, lang);
+    pageData = {
+      title: translated.title || pageData.title,
+      content: translated.content || pageData.content,
+    };
+  }
+} catch (error) {
+  console.warn('Directus Imprint konnte nicht geladen werden:', error);
+}
+---
+
+<BaseLayout title={pageData.title}>
+  <section class="py-24 max-w-3xl mx-auto px-6">
+    <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white mb-8">{pageData.title}</h1>
+    <div class="prose prose-invert max-w-none space-y-6 text-slate-300">
+      <Fragment set:html={pageData.content} />
+    </div>
+  </section>
+</BaseLayout>
