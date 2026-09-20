@@ -1,7 +1,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { DEFAULT_LANG, isSupportedLang } from './i18n/config';
 
-const UNPREFIXED_PASSTHROUGH = ['privacy', '404'];
+const UNPREFIXED_PASSTHROUGH = ['404'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
@@ -10,7 +10,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect(`/${DEFAULT_LANG}/`, 302);
   }
 
-  if (pathname.includes('.') || pathname.startsWith('/_astro/')) {
+  if (pathname.includes('.') || pathname.startsWith('/_astro/') || pathname.startsWith('/_image')) {
     return next();
   }
 

@@ -14,12 +14,11 @@ const localizedStaticPaths: string[] = [
   '/wiki/',
   '/terms/',
   '/changelog/',
+  '/privacy/',
+  '/imprint/',
 ];
 
-const unlocalizedStaticEntries: SitemapEntry[] = [
-  { path: '/privacy/' },
-  { path: '/imprint/' },
-];
+const unlocalizedStaticEntries: SitemapEntry[] = [];
 
 const escapeXml = (value: string) =>
   value
