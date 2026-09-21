@@ -73,7 +73,14 @@ try {
               </svg>
             </span>
           </summary>
-          <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" set:html={faq.answer} />
+          <div 
+            class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed space-y-3
+                  [&_a]:text-primary-500 hover:[&_a]:text-primary-400 [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-medium
+                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
+                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1
+                  [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:bg-slate-100 dark:[&_code]:bg-slate-800/80 [&_code]:font-mono [&_code]:text-xs [&_code]:text-slate-900 dark:[&_code]:text-slate-200" 
+            set:html={faq.answer} 
+          />
         </details>
       ))}
     </div>
