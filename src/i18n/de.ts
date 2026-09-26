@@ -214,6 +214,10 @@ export const de: Dictionary = {
       },
     ],
   },
+  wiki: {
+    pageSubtitle: 'Alles, was du über Rechte, Commands und Einrichtung der einzelnen Module wissen musst.',
+    emptyState: 'Aktuell sind noch keine Wiki-Artikel veröffentlicht.',
+  },
   highlights: {
     heading: 'Alles was du brauchst.',
     headingHighlight: 'Ohne das übliche Bot-Chaos.',

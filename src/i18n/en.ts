@@ -214,6 +214,10 @@ export const en: Dictionary = {
       },
     ],
   },
+  wiki: {
+    pageSubtitle: 'Everything you need to know about permissions, commands, and setting up each module.',
+    emptyState: 'No wiki articles have been published yet.',
+  },
   highlights: {
     heading: 'Everything you need.',
     headingHighlight: 'Without the usual bot clutter.',

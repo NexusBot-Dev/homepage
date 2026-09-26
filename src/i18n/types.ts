@@ -96,6 +96,10 @@ export interface Dictionary {
       status: string;
     }[];
   };
+  wiki: {
+    pageSubtitle: string;
+    emptyState: string;
+  };
   highlights: {
     heading: string;
     headingHighlight: string;

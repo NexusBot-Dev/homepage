@@ -1,40 +1,116 @@
 ---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { directus, readItems } from '../../../lib/directus';
+import { useTranslations } from '../../../i18n';
 
-const { lang } = Astro.params;
+const { lang: rawLang } = Astro.params;
+const lang = (rawLang || 'de').toLowerCase();
+const t = useTranslations(lang);
 
-let targetSlug = 'start/start';
+let categories: any[] = [];
+
+const getTranslation = (item: any, targetLang: string) => {
+  if (!item) return null;
+  const translations = Array.isArray(item.translations) ? item.translations : [];
+
+  const matched = translations.find((tr: any) => {
+    const rawCode = typeof tr.languages_code === 'object' && tr.languages_code !== null
+      ? (tr.languages_code.code || tr.languages_code.id)
+      : tr.languages_code;
+
+    const code = String(rawCode || '').toLowerCase();
+    const target = targetLang.toLowerCase();
+
+    return code === target || code.startsWith(`${target}-`) || target.startsWith(`${code}-`);
+  });
+
+  return {
+    ...item,
+    title: (matched && matched.title) ? matched.title : item.title || '',
+    description: (matched && matched.description) ? matched.description : item.description || '',
+  };
+};
+
+const extractCatId = (catVal: any): string | null => {
+  if (!catVal) return null;
+  if (Array.isArray(catVal) && catVal.length > 0) {
+    const first = catVal[0];
+    return String(typeof first === 'object' && first !== null ? (first.id || first.doc_categories_id) : first);
+  }
+  if (typeof catVal === 'object' && catVal !== null) {
+    return String(catVal.id || catVal.doc_categories_id);
+  }
+  return String(catVal);
+};
 
 try {
-  const categories = await directus.request(
-    readItems('doc_categories', {
+  const [rawCategories, rawArticles] = await Promise.all([
+    directus.request(readItems('doc_categories', {
       sort: ['sort'],
-      fields: ['id', 'slug']
-    })
-  );
-
-  const articles = await directus.request(
-    readItems('doc_articles', {
+      fields: ['*', 'translations.*', 'translations.languages_code.*']
+    })),
+    directus.request(readItems('doc_articles', {
       filter: { status: { _eq: 'published' } },
       sort: ['sort'],
-      fields: ['id', 'slug', 'category']
-    })
-  );
+      fields: ['*', 'translations.*', 'translations.languages_code.*']
+    }))
+  ]);
 
-  if (categories.length > 0 && articles.length > 0) {
-    const firstArticle = articles[0];
+  const localizedCategories = rawCategories.map((c: any) => getTranslation(c, lang));
+  const localizedArticles = rawArticles.map((a: any) => getTranslation(a, lang));
 
-    const catId = typeof firstArticle.category === 'object' && firstArticle.category !== null
-      ? (firstArticle.category.id || firstArticle.category.doc_categories_id)
-      : firstArticle.category;
-
-    const matchedCategory = categories.find((c: any) => String(c.id) === String(catId)) || categories[0];
-
-    targetSlug = `${matchedCategory.slug}/${firstArticle.slug}`;
-  }
+  categories = localizedCategories
+    .map((cat: any) => ({
+      ...cat,
+      articles: localizedArticles.filter((art: any) => extractCatId(art.category) === String(cat.id))
+    }))
+    .filter((cat: any) => cat.articles.length > 0);
 } catch (error) {
-  console.error("Wiki Index Redirect Error:", error);
+  console.error("Wiki Index Error:", error);
 }
-
-return Astro.redirect(`/${lang}/wiki/start/start/`, 302);
 ---
+
+<BaseLayout title={t.nav.wiki} description="Dokumentation und Konfigurationsanleitungen für Nexus.">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 max-w-4xl">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+        {t.nav.wiki}
+      </h1>
+      <p class="text-slate-400 text-lg">
+        {t.wiki.pageSubtitle}
+      </p>
+    </div>
+
+    {categories.length === 0 ? (
+      <div class="text-center py-12 text-slate-500 bg-slate-900/40 border border-slate-800 rounded-2xl">
+        {t.wiki.emptyState}
+      </div>
+    ) : (
+      <div class="space-y-10">
+        {categories.map((cat: any) => (
+          <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+            <h2 class="text-xl font-bold text-white mb-1">{cat.title}</h2>
+            {cat.description && (
+              <p class="text-sm text-slate-400 mb-5">{cat.description}</p>
+            )}
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {cat.articles.map((art: any) => (
+                <li>
+                  <a
+                    href={`/${lang}/wiki/${cat.slug}/${art.slug}`}
+                    class="flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-950/50 border border-slate-800/60 text-slate-200 hover:text-emerald-400 hover:border-emerald-500/40 transition-colors text-sm font-medium"
+                  >
+                    <svg class="w-4 h-4 shrink-0 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    {art.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
