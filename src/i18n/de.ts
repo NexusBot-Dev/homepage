@@ -23,6 +23,10 @@ export const de: Dictionary = {
     privacy: 'Datenschutzerklärung',
     terms: 'Nutzungsbedingungen',
     rights: 'Alle Rechte vorbehalten.',
+    githubGroup: 'Github',
+    bot: 'Nexus Repository',
+    website: 'Website Repository',
+    dashboard: 'Dashboard Repository',
   },
   hero: {
     titleLine1: 'Der moderne Bot für',

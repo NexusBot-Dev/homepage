@@ -21,6 +21,10 @@ export interface Dictionary {
     privacy: string;
     terms: string;
     rights: string;
+    githubGroup: string;
+    bot: string;
+    website: string;
+    dashboard: string;
   };
   hero: {
     titleLine1: string;

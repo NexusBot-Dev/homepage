@@ -23,6 +23,10 @@ export const en: Dictionary = {
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
     rights: 'All rights reserved.',
+    githubGroup: 'Github',
+    bot: 'Nexus Repository',
+    website: 'Website Repository',
+    dashboard: 'Dashboard Repository',
   },
   hero: {
     titleLine1: 'The modern bot for',
