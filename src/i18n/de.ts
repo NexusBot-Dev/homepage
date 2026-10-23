@@ -150,6 +150,11 @@ export const de: Dictionary = {
             description: 'Eigene Danke-Nachrichten für Server-Booster, frei konfigurierbar im Dashboard.',
             tag: 'free',
           },
+          {
+            title: 'Giveaways',
+            description: 'Gewinnspiele direkt auf deinem Server starten, mit Teilnahme per Button und fairer Auslosung der Gewinner.',
+            tag: 'free',
+          },
         ],
       },
       {

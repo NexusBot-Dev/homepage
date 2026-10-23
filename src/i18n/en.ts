@@ -150,6 +150,11 @@ export const en: Dictionary = {
             description: 'Custom thank-you messages for server boosters, fully configurable from the dashboard.',
             tag: 'free',
           },
+          {
+            title: 'Giveaways',
+            description: 'Run giveaways right on your server, with one-click entry and a fair random draw of the winners.',
+            tag: 'free',
+          },
         ],
       },
       {
