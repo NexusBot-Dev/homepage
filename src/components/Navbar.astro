@@ -144,7 +144,7 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
 
     updateIcons();
 
-    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
       if (button.dataset.themeBound === 'true') return;
       button.dataset.themeBound = 'true';
       button.addEventListener('click', toggleTheme);
