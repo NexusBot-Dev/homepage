@@ -7,7 +7,6 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import CommandPalette from '../components/CommandPalette.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from '../config';
-import { resolvePath } from '../utils/navigation';
 import { SUPPORTED_LANGS, DEFAULT_LANG } from '../i18n/config';
 
 interface Props {
@@ -120,6 +119,8 @@ const softwareApplicationData = isHomepage
       },
     }
   : null;
+
+const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <!DOCTYPE html>
@@ -169,9 +170,9 @@ const softwareApplicationData = isHomepage
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script type="application/ld+json" set:html={jsonLd(structuredData)} />
     {softwareApplicationData && (
-      <script type="application/ld+json" set:html={JSON.stringify(softwareApplicationData)} />
+      <script type="application/ld+json" set:html={jsonLd(softwareApplicationData)} />
     )}
     
     <title>{fullTitle}</title>
