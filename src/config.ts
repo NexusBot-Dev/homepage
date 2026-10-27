@@ -4,7 +4,7 @@
 export const SITE_TITLE = 'Nexus Bot';
 export const SITE_DESCRIPTION = 'The focused Discord bot for streamers and gaming communities. Instant alerts, real-time raid defense - no bloat, no filler.';
 export const SITE_URL = 'https://trynexus.de';
-export const REPOSITORY_URL = 'https://github.com/dein-github-username/nexus';
+export const REPOSITORY_URL = 'https://github.com/NexusBot-Dev/homepage';
 
 // Bot Settings
 export const DISCORD_INVITE_URL = 'https://discord.com/oauth2/authorize?client_id=1510643364104765460';
