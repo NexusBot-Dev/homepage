@@ -48,7 +48,7 @@ export const en: Dictionary = {
     subtitlePrefix: 'No hidden features. No subscription tricks. Just a',
     subtitleBotWord: 'bot',
     subtitleSuffix: ' that works.',
-    earlyBirdBadge: 'Early bird: get 3 months of Premium for free. Limited to the first 75 servers!',
+    earlyBirdBadge: 'Early Bird: 3 months of Premium free – until Nov 30, 2026!',
     free: {
       name: 'Free',
       tagline: 'Everything you need to get started.',
