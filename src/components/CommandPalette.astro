@@ -98,10 +98,11 @@ import { resolvePath } from '../utils/navigation';
     }
 
     function getMatches(query) {
-      return window.__zenixSearchIndex.filter(item => 
+      const pageLang = document.documentElement.lang;
+      return window.__zenixSearchIndex.filter(item => (!item.lang || item.lang === pageLang) && (
         item.title.toLowerCase().includes(query) || 
         item.description.toLowerCase().includes(query)
-      );
+      ));
     }
 
     function togglePalette() {

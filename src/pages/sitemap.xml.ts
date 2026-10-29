@@ -14,6 +14,7 @@ const localizedStaticPaths: string[] = [
   '/wiki/',
   '/terms/',
   '/changelog/',
+  '/changelog/archive/',
   '/privacy/',
   '/imprint/',
 ];

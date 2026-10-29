@@ -126,7 +126,7 @@ export const en: Dictionary = {
           {
             title: 'Anti-Nuke Auto-Restore',
             description: 'Detects attacks automatically and restores deleted channels, roles and permissions without any data loss.',
-            tag: 'soon',
+            tag: 'free',
           },
         ],
       },
@@ -266,6 +266,9 @@ export const en: Dictionary = {
     pageTitle: 'Changelog',
     subtitle: 'All new features, improvements and bug fixes around Nexus, at a glance.',
     emptyState: 'No changelog entries have been published yet.',
+    archiveLink: 'View older releases',
+    archiveTitle: 'Changelog Archive',
+    backLink: 'Back to the latest releases',
   },
   faq: {
     heading: 'Frequently Asked',

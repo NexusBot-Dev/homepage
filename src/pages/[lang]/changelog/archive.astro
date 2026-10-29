@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ChangelogList from '../../../components/ChangelogList.astro';
+import { fetchReleases } from '../../../lib/changelog';
+import { resolvePath } from '../../../utils/navigation';
+import { useTranslations } from '../../../i18n';
+
+const { lang: rawLang } = Astro.params;
+const lang = (rawLang || 'de').toLowerCase();
+const t = useTranslations(lang);
+
+const releases = await fetchReleases(lang, -1);
+---
+
+<BaseLayout title={t.changelog.archiveTitle} description="Alle Updates und Release Notes für Nexus.">
+  <div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+          {t.changelog.archiveTitle}
+        </h1>
+        <a
+          href={resolvePath(`/${lang}/changelog/`)}
+          class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
+        >
+          ← {t.changelog.backLink}
+        </a>
+      </div>
+
+      {releases.length === 0 ? (
+        <div class="text-center py-12 text-slate-500 dark:text-slate-400 bg-slate-900/40 border border-slate-800 rounded-2xl">
+          {t.changelog.emptyState}
+        </div>
+      ) : (
+        <ChangelogList releases={releases} lang={lang} />
+      )}
+
+    </div>
+  </div>
+</BaseLayout>

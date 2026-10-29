@@ -126,7 +126,7 @@ export const de: Dictionary = {
           {
             title: 'Anti-Nuke Auto-Restore',
             description: 'Erkennt Angriffe automatisch und stellt gelöschte Kanäle, Rollen und Berechtigungen ohne Datenverlust wieder her.',
-            tag: 'soon',
+            tag: 'free',
           },
         ],
       },
@@ -266,6 +266,9 @@ export const de: Dictionary = {
     pageTitle: 'Changelog',
     subtitle: 'Alle neuen Features, Verbesserungen und Bugfixes rund um Nexus auf einen Blick.',
     emptyState: 'Aktuell sind noch keine Changelog-Einträge veröffentlicht.',
+    archiveLink: 'Ältere Releases ansehen',
+    archiveTitle: 'Changelog-Archiv',
+    backLink: 'Zurück zu den neuesten Releases',
   },
   faq: {
     heading: 'Frequently Asked',

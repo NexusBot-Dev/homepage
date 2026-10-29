@@ -131,6 +131,9 @@ export interface Dictionary {
     pageTitle: string;
     subtitle: string;
     emptyState: string;
+    archiveLink: string;
+    archiveTitle: string;
+    backLink: string;
   };
   faq: {
     heading: string;
