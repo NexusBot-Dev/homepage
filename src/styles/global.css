@@ -115,3 +115,15 @@
   overflow-x: auto;
   max-width: 100%;
 }
+
+/* Inline code in Directus/WYSIWYG content: no typography backticks, consistent green style */
+@layer components {
+  .prose :where(code):not(:where(pre code, [class~="not-prose"], [class~="not-prose"] *)) {
+    @apply text-emerald-400 bg-slate-950/60 px-1.5 py-0.5 rounded font-medium;
+  }
+
+  .prose :where(code):not(:where(pre code))::before,
+  .prose :where(code):not(:where(pre code))::after {
+    content: none;
+  }
+}
