@@ -35,6 +35,21 @@ export const de: Dictionary = {
       'Nexus bringt Leveling, Moderation und Reaction Roles auf deinen Server - blitzschnell per Knopfdruck, garantiert ohne nervige Paywalls und zu 100% datenschutzfreundlich in Deutschland gehostet.',
     inviteCta: 'Nexus einladen',
     discoverCta: 'Features entdecken',
+    mockup: {
+      channelGeneral: '💬-general',
+      channelFactions: '⚔️-fraktionswahl',
+      channelRules: '📑-regeln',
+      timestamp: 'heute um 15:36 Uhr',
+      embedTitle: '⚔️ Wähle deine Fraktion!',
+      embedDescription:
+        'Willkommen auf dem Community-Server! Wähle unten im Dropdown-Menü deine gewünschte Fraktion aus, um dir automatisch deine Rolle zuzuweisen und die geheimen Channels freizuschalten.',
+      moduleLabel: 'Modul',
+      statusValue: 'Bereit • Aktiv',
+      selectPlaceholder: 'Wähle Fraktion aus',
+      factionAlliance: 'Allianz',
+      factionHorde: 'Horde',
+      factionNeutral: 'Neutral',
+    },
   },
   cta: {
     title: 'Bereit, deinen Server auf das nächste Level zu bringen?',

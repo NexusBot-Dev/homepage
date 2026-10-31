@@ -9,6 +9,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const m = t.hero.mockup;
 ---
 
 <section class="relative pt-32 pb-32 lg:pt-48 lg:pb-40 overflow-hidden">
@@ -64,13 +65,13 @@ const t = useTranslations(lang);
           
           <div class="space-y-0.5 mt-1">
             <div class="h-8 w-full hover:bg-[#35373c] rounded flex items-center px-2 text-sm text-[#949ba4] font-medium transition-colors cursor-default">
-              <span class="text-slate-500 mr-2 text-sm font-sans">#</span> 💬-general
+              <span class="text-slate-500 mr-2 text-sm font-sans">#</span> {m.channelGeneral}
             </div>
             <div class="h-8 w-full rounded flex items-center px-2 text-sm text-white font-semibold border-l-2 border-primary-500 cursor-default" style="background-color: #35373c;">
-              <span class="text-primary-400 mr-2 text-sm font-sans">#</span> ⚔️-fraktionswahl
+              <span class="text-primary-400 mr-2 text-sm font-sans">#</span> {m.channelFactions}
             </div>
             <div class="h-8 w-full hover:bg-[#35373c] rounded flex items-center px-2 text-sm text-[#949ba4] font-medium transition-colors cursor-default">
-              <span class="text-slate-500 mr-2 text-sm font-sans">#</span> 📑-regeln
+              <span class="text-slate-500 mr-2 text-sm font-sans">#</span> {m.channelRules}
             </div>
           </div>
         </div>
@@ -90,27 +91,27 @@ const t = useTranslations(lang);
                   <span class="font-bold text-white text-base">Nexus</span>
                   <span class="bg-[#5865f2] text-white text-[10px] px-1.5 py-0.5 rounded font-medium tracking-wider uppercase">Bot</span>
                 </div>
-                <span class="text-xs text-slate-400">heute um 15:36 Uhr</span>
+                <span class="text-xs text-slate-400">{m.timestamp}</span>
               </div>
             </div>
             
             <!-- Embed Nachricht -->
             <div class="flex rounded-r border-l-4 border-primary-500 my-3 p-3 md:p-4" style="background-color: #2b2d31;">
               <div class="flex-1">
-                <h3 class="text-white font-bold text-base md:text-lg mb-1">⚔️ Wähle deine Fraktion!</h3>
+                <h3 class="text-white font-bold text-base md:text-lg mb-1">{m.embedTitle}</h3>
                 <p class="text-[#dbdee1] text-xs md:text-sm leading-relaxed mb-4">
-                  Willkommen auf dem Community-Server! Wähle unten im Dropdown-Menü deine gewünschte Fraktion aus, um dir automatisch deine Rolle zuzuweisen und die geheimen Channels freizuschalten.
+                  {m.embedDescription}
                 </p>
                 
                 <!-- Module Specs -->
                 <div class="grid grid-cols-2 gap-2 md:gap-4 mt-2 border-t border-[#1e1f22]/60 pt-3 text-[11px] md:text-xs">
                   <div>
-                    <span class="block text-[#949ba4] font-bold uppercase tracking-wider text-[9px] md:text-[10px]">Modul</span>
+                    <span class="block text-[#949ba4] font-bold uppercase tracking-wider text-[9px] md:text-[10px]">{m.moduleLabel}</span>
                     <span class="text-primary-400 font-medium whitespace-nowrap">Reaction Roles</span>
                   </div>
                   <div>
                     <span class="block text-[#949ba4] font-bold uppercase tracking-wider text-[9px] md:text-[10px]">Status</span>
-                    <span class="text-emerald-400 font-medium">Bereit • Aktiv</span>
+                    <span class="text-emerald-400 font-medium">{m.statusValue}</span>
                   </div>
                 </div>
               </div>
@@ -123,7 +124,7 @@ const t = useTranslations(lang);
               <div class="w-full bg-[#111214] border border-[#111214] rounded py-2 px-3 flex items-center justify-between text-[#dbdee1] text-xs md:text-sm cursor-default">
                 <div class="flex items-center gap-2">
                   <span class="text-[#949ba4] text-sm md:text-base">🛡️</span>
-                  <span class="font-medium text-[#f2f3f5]">Wähle Fraktion aus</span>
+                  <span class="font-medium text-[#f2f3f5]">{m.selectPlaceholder}</span>
                 </div>
                 <svg class="w-4 h-4 text-[#949ba4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
@@ -137,7 +138,7 @@ const t = useTranslations(lang);
                 <div class="flex items-center justify-between p-2 rounded hover:bg-[#2b2d31] text-xs md:text-sm cursor-default transition-colors duration-150 group/item" style="background-color: rgba(43, 45, 49, 0.4);">
                   <div class="flex items-center gap-2">
                     <span class="text-sm md:text-base">🔴</span>
-                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">Allianz</span>
+                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">{m.factionAlliance}</span>
                     <span class="text-[10px] md:text-[11px] text-[#72767d] font-mono bg-[#1e1f22] px-1 rounded">(0)</span>
                   </div>
                   <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-primary-500 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -149,7 +150,7 @@ const t = useTranslations(lang);
                 <div class="flex items-center justify-between p-2 rounded hover:bg-[#2b2d31] text-xs md:text-sm cursor-default transition-colors duration-150 group/item" style="background-color: rgba(43, 45, 49, 0.4);">
                   <div class="flex items-center gap-2">
                     <span class="text-sm md:text-base">🔵</span>
-                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">Horde</span>
+                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">{m.factionHorde}</span>
                     <span class="text-[10px] md:text-[11px] text-[#72767d] font-mono bg-[#1e1f22] px-1 rounded">(0)</span>
                   </div>
                   <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-primary-500 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,7 +162,7 @@ const t = useTranslations(lang);
                 <div class="flex items-center justify-between p-2 rounded hover:bg-[#2b2d31] text-xs md:text-sm cursor-default transition-colors duration-150 group/item" style="background-color: rgba(43, 45, 49, 0.4);">
                   <div class="flex items-center gap-2">
                     <span class="text-sm md:text-base">⚪</span>
-                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">Neutral</span>
+                    <span class="text-[#dbdee1] font-medium group-hover/item:text-white">{m.factionNeutral}</span>
                     <span class="text-[10px] md:text-[11px] text-[#72767d] font-mono bg-[#1e1f22] px-1 rounded">(1)</span>
                   </div>
                   <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-primary-500 opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -35,6 +35,21 @@ export const en: Dictionary = {
       'Nexus brings leveling, moderation and reaction roles to your server - up and running in seconds, with no annoying paywalls and hosted 100% privacy-friendly in Germany.',
     inviteCta: 'Invite Nexus',
     discoverCta: 'Explore Features',
+    mockup: {
+      channelGeneral: '💬-general',
+      channelFactions: '⚔️-pick-a-faction',
+      channelRules: '📑-rules',
+      timestamp: 'today at 3:36 PM',
+      embedTitle: '⚔️ Choose your faction!',
+      embedDescription:
+        'Welcome to the community server! Pick your faction from the dropdown below to get your role assigned automatically and unlock the secret channels.',
+      moduleLabel: 'Module',
+      statusValue: 'Ready • Active',
+      selectPlaceholder: 'Select a faction',
+      factionAlliance: 'Alliance',
+      factionHorde: 'Horde',
+      factionNeutral: 'Neutral',
+    },
   },
   cta: {
     title: 'Ready to take your server to the next level?',

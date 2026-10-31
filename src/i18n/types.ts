@@ -32,6 +32,20 @@ export interface Dictionary {
     subtitle: string;
     inviteCta: string;
     discoverCta: string;
+    mockup: {
+      channelGeneral: string;
+      channelFactions: string;
+      channelRules: string;
+      timestamp: string;
+      embedTitle: string;
+      embedDescription: string;
+      moduleLabel: string;
+      statusValue: string;
+      selectPlaceholder: string;
+      factionAlliance: string;
+      factionHorde: string;
+      factionNeutral: string;
+    };
   };
   cta: {
     title: string;
