@@ -230,7 +230,7 @@ export const de: Dictionary = {
       {
         title: 'Anti-Nuke Auto-Restore',
         description: 'Vollautomatische Wiederherstellung nach Angriffen: Gelöschte Kanäle, Rollen und Server-Berechtigungen werden direkt nach Erkennung eines Nukes ohne Datenverlust restauriert.',
-        status: 'In Arbeit',
+        status: 'Kürzlich Veröffentlicht',
       },
       {
         title: 'Quality of Life & Optimierung',

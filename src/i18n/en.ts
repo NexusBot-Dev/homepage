@@ -230,7 +230,7 @@ export const en: Dictionary = {
       {
         title: 'Anti-Nuke Auto-Restore',
         description: 'Fully automatic recovery after attacks: deleted channels, roles and server permissions are restored immediately once a nuke is detected, with no data loss.',
-        status: 'In progress',
+        status: 'Recently released',
       },
       {
         title: 'Quality of Life & Optimization',
