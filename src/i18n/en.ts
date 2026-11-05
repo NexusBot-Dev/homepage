@@ -73,7 +73,7 @@ export const en: Dictionary = {
         'Moderation, leveling & roles – fully included',
         'Stream alerts (1x each for Twitch, Kick & YouTube)',
         'Up to 5 saved embeds',
-        'Reaction roles (all roles selectable at once)',
+        'Reaction roles with standard & server emojis',
         'Nexus mint-green branding',
       ],
     },
@@ -85,9 +85,10 @@ export const en: Dictionary = {
       cta: '✨ Get Premium',
       features: [
         'Everything in Free, plus:',
-        'Up to 5 stream alerts per platform',
+        'Up to 5 Twitch, 5 Kick & 3 YouTube alerts',
         'Smart Roles (separate pings for Twitch, Kick & YT)',
-        'Unlimited embeds & custom colors',
+        'Up to 100 embeds & custom colors',
+        'Reaction roles as dropdown menus',
         'Exclusive reaction role groups (either/or)',
         'Scheduled embeds',
         'Up to 5 welcome & boost messages',
@@ -108,6 +109,8 @@ export const en: Dictionary = {
       { name: 'Welcome messages', free: 'Up to 1', premium: 'Up to 5' },
       { name: 'Boost messages', free: 'Up to 1', premium: 'Up to 5' },
       { name: 'Reaction roles: basic mode', free: 'All roles selectable', premium: 'All roles selectable' },
+      { name: 'Reaction roles: custom server emojis', free: true, premium: true },
+      { name: 'Reaction roles: dropdown menu', free: false, premium: true },
       { name: 'Reaction roles: exclusive groups (either/or)', free: false, premium: true },
       { name: 'Ticket system: categories / panels', free: 'Up to 2', premium: 'Up to 10' },
       { name: 'Ticket workflow (72h close, DM transcript & auto-delete)', free: 'Full', premium: 'Full' },
@@ -155,7 +158,7 @@ export const en: Dictionary = {
           },
           {
             title: 'Reaction Roles',
-            description: 'Role assignment via dropdown menu. Exclusive either/or groups for clearly separated factions.',
+            description: 'Role assignment via emoji reactions, with standard and server emojis. With Premium also as a dropdown menu and with exclusive either/or groups.',
             tag: 'free',
           },
           {
@@ -296,7 +299,7 @@ export const en: Dictionary = {
       },
       {
         question: 'Is the bot really completely free?',
-        answer: 'Yes, all core functions like leveling, standard moderation and reaction roles are 100% free with no paywall. Our planned Premium model only adds cosmetic extras or server enhancements \u2013 we never lock features away.',
+        answer: 'Yes, all core features like leveling, moderation and reaction roles are 100% free with no paywall. Premium adds higher limits and convenience features like scheduled embeds \u2013 what is free today stays free.',
       },
       {
         question: 'Is my server data or chat log ever sold?',
