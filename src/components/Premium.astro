@@ -1,7 +1,7 @@
 ---
 import Button from './Button.astro';
 import Badge from './Badge.astro';
-import { DISCORD_INVITE_URL } from '../config';
+import { DISCORD_INVITE_URL, PREMIUM_STORE_URL } from '../config';
 import { useTranslations } from '../i18n';
 
 interface Props {
@@ -63,7 +63,7 @@ const features = t.premium.tableRows;
           <span class="text-5xl font-heading font-extrabold text-slate-900 dark:text-white">$3.99</span>
           <span class="text-slate-500 dark:text-slate-400 font-medium"> {t.premium.premiumPlan.priceSuffix}</span>
         </div>
-        <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" class="w-full block mb-8">
+        <a href={PREMIUM_STORE_URL} target="_blank" rel="noopener noreferrer" class="w-full block mb-8">
           <span class="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-slate-950 font-bold px-6 py-3 rounded-2xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-primary-500/20 text-center cursor-pointer">
             {t.premium.premiumPlan.cta}
           </span>

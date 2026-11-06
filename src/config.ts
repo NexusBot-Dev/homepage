@@ -8,6 +8,10 @@ export const REPOSITORY_URL = 'https://github.com/NexusBot-Dev/homepage';
 
 // Bot Settings
 export const DISCORD_INVITE_URL = 'https://discord.com/oauth2/authorize?client_id=1510643364104765460';
+// Nexus Premium: Server-Abo im Discord-Store
+export const DISCORD_APP_ID = '1510643364104765460';
+export const PREMIUM_SKU_ID = '1535637791466324080';
+export const PREMIUM_STORE_URL = `https://discord.com/application-directory/${DISCORD_APP_ID}/store/${PREMIUM_SKU_ID}`;
 export const DISCORD_SUPPORT_SERVER = 'https://discord.gg/YFCrvBb6t3'; 
 
 // Brand Settings
