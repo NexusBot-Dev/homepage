@@ -228,19 +228,19 @@ export const en: Dictionary = {
     ideaButton: '💡 Suggest an idea & help shape Nexus',
     items: [
       {
-        title: 'Anti-Nuke Auto-Restore',
-        description: 'Fully automatic recovery after attacks: deleted channels, roles and server permissions are restored immediately once a nuke is detected, with no data loss.',
+        title: 'Live Alerts 2.0',
+        description: 'A button takes viewers straight to the stream, short drops no longer cause a second ping, and once the stream ends the live message turns into “Stream ended” – including the duration.',
         status: 'Recently released',
       },
       {
-        title: 'Quality of Life & Optimization',
-        description: 'Refining existing modules for an even smoother experience: faster response times, a more intuitive dashboard, and everyday detail improvements.',
+        title: 'Voice XP',
+        description: 'XP for gaming together: as soon as at least two members are unmuted in a voice channel, they earn experience. Can be turned on or off per server.',
         status: 'In progress',
       },
       {
-        title: 'Social Media & Live Alerts',
-        description: 'Never miss a stream or upload again. Fully automatic, delay-free notifications in your channels the moment you go live.',
-        status: 'Recently released',
+        title: 'Twitch Schedule as Server Events',
+        description: 'Your Twitch stream schedule automatically shows up as Discord events. Your community sees upcoming streams right in the server and can click “Interested”.',
+        status: 'Planned',
       },
     ],
   },

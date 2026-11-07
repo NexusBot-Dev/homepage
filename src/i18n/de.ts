@@ -228,19 +228,19 @@ export const de: Dictionary = {
     ideaButton: '💡 Idee einreichen & Nexus mitgestalten',
     items: [
       {
-        title: 'Anti-Nuke Auto-Restore',
-        description: 'Vollautomatische Wiederherstellung nach Angriffen: Gelöschte Kanäle, Rollen und Server-Berechtigungen werden direkt nach Erkennung eines Nukes ohne Datenverlust restauriert.',
+        title: 'Live-Alerts 2.0',
+        description: 'Ein Button führt direkt zum Stream, kurze Abbrüche lösen keinen doppelten Ping mehr aus, und nach dem Stream wird die Live-Nachricht zu „Stream beendet“ – inklusive Dauer.',
         status: 'Kürzlich Veröffentlicht',
       },
       {
-        title: 'Quality of Life & Optimierung',
-        description: 'Überarbeitung bestehender Module für ein noch flüssigeres Erlebnis: Schnellere Reaktionszeiten, intuitivere Dashboard-Bedienung und Detailverbesserungen im Alltag.',
+        title: 'Voice-XP',
+        description: 'XP fürs gemeinsame Zocken: Sobald mindestens zwei Mitglieder ungemutet im Voice-Kanal sind, sammeln sie Erfahrungspunkte. Pro Server ein- und ausschaltbar.',
         status: 'In Arbeit',
       },
       {
-        title: 'Social Media & Live-Alerts',
-        description: 'Verpasse keine Streams oder Uploads mehr. Vollautomatische und verzögerungsfreie Benachrichtigungen in deinen Kanälen, sobald du live gehst.',
-        status: 'Kürzlich Veröffentlicht',
+        title: 'Twitch-Zeitplan als Server-Events',
+        description: 'Dein Twitch-Streamplan erscheint automatisch als Discord-Event. Deine Community sieht kommende Streams direkt im Server und kann auf „Interessiert“ klicken.',
+        status: 'Geplant',
       },
     ],
   },
