@@ -72,7 +72,6 @@ export const en: Dictionary = {
       features: [
         'Moderation, leveling & roles – fully included',
         'Stream alerts (1x each for Twitch, Kick & YouTube)',
-        'Stream schedule as server events (1 streamer)',
         'Up to 5 saved embeds',
         'Reaction roles with standard & server emojis',
         'Nexus mint-green branding',
@@ -88,7 +87,6 @@ export const en: Dictionary = {
         'Everything in Free, plus:',
         'Up to 5 Twitch, 5 Kick & 3 YouTube alerts',
         'Smart Roles (separate pings for Twitch, Kick & YT)',
-        'Stream schedule as server events for up to 5 streamers',
         'Up to 100 embeds & custom colors',
         'Reaction roles as dropdown menus',
         'Exclusive reaction role groups (either/or)',
@@ -105,7 +103,6 @@ export const en: Dictionary = {
       { name: 'Moderation, leveling & roles', free: 'Full', premium: 'Full' },
       { name: 'Stream alerts (Twitch, Kick & YouTube)', free: '1x per platform', premium: '5x Twitch, 5x Kick, 3x YT' },
       { name: 'Smart Roles (separate pings for Twitch, Kick & YT)', free: false, premium: true },
-      { name: 'Twitch schedule as server events', free: '1 streamer', premium: 'Up to 5 streamers' },
       { name: 'Saved embeds', free: 'Up to 5', premium: 'Up to 100' },
       { name: 'Embed colors & styling', free: 'Standard mint green', premium: 'Free color choice (hex) & custom' },
       { name: 'Scheduled embeds', free: false, premium: true },
@@ -202,7 +199,7 @@ export const en: Dictionary = {
           {
             title: 'Stream Schedule as Server Events',
             description: 'Dates from your Twitch schedule automatically show up as Discord events and stay up to date when plans change.',
-            tag: 'free',
+            tag: 'soon',
           },
         ],
       },
@@ -248,7 +245,7 @@ export const en: Dictionary = {
       {
         title: 'Twitch Schedule as Server Events',
         description: 'Your Twitch stream schedule automatically shows up as Discord events. Your community sees upcoming streams right in the server and can click “Interested” – if you move or cancel a stream, the event follows.',
-        status: 'Recently released',
+        status: 'In progress',
       },
     ],
   },
