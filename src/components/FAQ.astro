@@ -47,14 +47,14 @@ try {
 }
 ---
 
-<section class="py-32 bg-white dark:bg-[#09090b] relative overflow-hidden">
+<section class="py-32 bg-[#09090b] relative overflow-hidden">
   <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">
     
     <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
-      <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
+      <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-white mb-6">
         {t.faq.heading} <span class="text-primary-500">{t.faq.headingHighlight}</span>
       </h2>
-      <p class="text-xl text-slate-600 dark:text-slate-400">
+      <p class="text-xl text-slate-400">
         {t.faq.subtitle}
       </p>
     </div>
@@ -62,9 +62,9 @@ try {
     <div class="space-y-4">
       {faqs.map((faq, index) => (
         <details class="group glass-panel rounded-2xl [&_summary::-webkit-details-marker]:hidden reveal-on-scroll" style={`transition-delay: ${index * 50}ms;`}>
-          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-slate-900 dark:text-white font-medium">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-white font-medium">
             <h3 class="text-lg font-heading font-bold">{faq.question}</h3>
-            <span class="relative h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400 group-open:text-primary-600 dark:group-open:text-primary-400 transition-colors">
+            <span class="relative h-5 w-5 shrink-0 text-slate-400 group-open:text-primary-400 transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 h-5 w-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
@@ -74,11 +74,11 @@ try {
             </span>
           </summary>
           <div 
-            class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed space-y-3
+            class="px-6 pb-6 text-slate-400 leading-relaxed space-y-3
                   [&_a]:text-primary-500 hover:[&_a]:text-primary-400 [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-medium
                   [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
                   [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1
-                  [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:bg-slate-100 dark:[&_code]:bg-slate-800/80 [&_code]:font-mono [&_code]:text-xs [&_code]:text-slate-900 dark:[&_code]:text-slate-200" 
+                  [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:bg-slate-800/80 [&_code]:font-mono [&_code]:text-xs [&_code]:text-slate-200" 
             set:html={faq.answer} 
           />
         </details>

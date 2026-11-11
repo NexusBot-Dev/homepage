@@ -5,48 +5,21 @@ async function useTheme(page: Page, theme: 'light' | 'dark') {
 }
 
 test.describe('theme and navigation regressions', () => {
-  test('theme toggle updates page, navbar, cards, and footer colors', async ({ page }) => {
-    await useTheme(page, 'dark');
-    await page.goto('/');
-
-    const body = page.locator('body');
-    const navbar = page.locator('header');
-    const featureCard = page.locator('#features .glass-panel').first();
-    const footer = page.locator('footer');
-
-    const darkBodyColor = await body.evaluate((el) => getComputedStyle(el).backgroundColor);
-    const darkFooterColor = await footer.evaluate((el) => getComputedStyle(el).backgroundColor);
-
-    await page.locator('[data-theme-toggle]:visible').first().click();
-    await expect(page.locator('html')).not.toHaveClass(/dark/);
-
-    await expect
-      .poll(() => body.evaluate((el) => getComputedStyle(el).backgroundColor))
-      .not.toBe(darkBodyColor);
-    await expect
-      .poll(() => footer.evaluate((el) => getComputedStyle(el).backgroundColor))
-      .not.toBe(darkFooterColor);
-
-    await expect(navbar).toBeVisible();
-    await expect(featureCard).toBeVisible();
-  });
-
-  test('theme toggle remains clickable after scrolling', async ({ page }) => {
-    await useTheme(page, 'light');
-    await page.goto('/');
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2));
-
-    const toggle = page.locator('[data-theme-toggle]:visible').first();
-    await expect(toggle).toBeVisible();
-    await toggle.click();
-    await expect(page.locator('html')).toHaveClass(/dark/);
-  });
-
-  test('theme stays dark on pricing route', async ({ page }) => {
-    await useTheme(page, 'dark');
-    await page.goto('/pricing/');
-    await expect(page.locator('html')).toHaveClass(/dark/);
-  });
+  // Die Seite hat nur ein dunkles Design — auch bei hellem System und altem Wert aus dem früheren Umschalter
+  for (const scheme of ['light', 'dark'] as const) {
+    test(`always dark, even with system color scheme ${scheme}`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: scheme });
+      await useTheme(page, 'light');
+      for (const path of ['/de/', '/de/premium/']) {
+        await page.goto(path);
+        const look = await page.evaluate(() => ({
+          body: getComputedStyle(document.body).backgroundColor,
+          scheme: getComputedStyle(document.documentElement).colorScheme,
+        }));
+        expect(look, path).toEqual({ body: 'rgb(9, 9, 11)', scheme: 'dark' });
+      }
+    });
+  }
 
   test('pricing page section links target homepage anchors', async ({ page }) => {
     await page.goto('/pricing/');

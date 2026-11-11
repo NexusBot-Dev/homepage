@@ -11,27 +11,27 @@ const t = useTranslations(lang);
 
 // Icon/Farbe sind rein dekorativ und bleiben Index-gebunden an t.roadmap.items
 const STATUS = {
-  released: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
-  inProgress: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20',
-  planned: 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20',
+  released: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+  inProgress: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+  planned: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
 };
 const visuals = [
   {
     // Live-Alerts 2.0
     statusColor: STATUS.released,
-    iconColor: 'text-rose-500 dark:text-rose-400 bg-rose-500/10 border-rose-500/20',
+    iconColor: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
   },
   {
     // Voice-XP
     statusColor: STATUS.inProgress,
-    iconColor: 'text-violet-500 dark:text-violet-400 bg-violet-500/10 border-violet-500/20',
+    iconColor: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-headphones"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>`,
   },
   {
     // Twitch-Zeitplan als Server-Events
     statusColor: STATUS.released,
-    iconColor: 'text-sky-500 dark:text-sky-400 bg-sky-500/10 border-sky-500/20',
+    iconColor: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>`,
   },
 ];
@@ -39,14 +39,14 @@ const visuals = [
 const roadmapItems = t.roadmap.items.map((item, i) => ({ ...item, ...visuals[i] }));
 ---
 
-<section id="roadmap" class="py-32 border-t border-slate-200 dark:border-slate-800 relative">
+<section id="roadmap" class="py-32 border-t border-slate-800 relative">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
     <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
-      <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 dark:text-white mb-6">
+      <h2 class="text-4xl md:text-5xl font-heading font-extrabold text-white mb-6">
         {t.roadmap.heading} <span class="text-primary-500">{t.roadmap.headingBrand}</span> Roadmap
       </h2>
-      <p class="text-xl text-slate-600 dark:text-slate-400">
+      <p class="text-xl text-slate-400">
         {t.roadmap.subtitle}
       </p>
     </div>
@@ -63,15 +63,15 @@ const roadmapItems = t.roadmap.items.map((item, i) => ({ ...item, ...visuals[i] 
               </span>
             </div>
 
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{item.description}</p>
+            <h3 class="text-xl font-bold text-white mb-3">{item.title}</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">{item.description}</p>
           </div>
         </div>
       ))}
     </div>
 
     <div class="text-center mt-12 reveal-on-scroll">
-      <p class="text-slate-500 dark:text-slate-500 text-sm mb-4">{t.roadmap.ideaPrompt}</p>
+      <p class="text-slate-500 text-sm mb-4">{t.roadmap.ideaPrompt}</p>
       <a 
         href={DISCORD_SUPPORT_SERVER} 
         target="_blank" 

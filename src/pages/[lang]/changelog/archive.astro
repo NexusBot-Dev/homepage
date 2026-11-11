@@ -17,7 +17,7 @@ const releases = await fetchReleases(lang, -1);
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
 
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
           {t.changelog.archiveTitle}
         </h1>
         <a
@@ -29,7 +29,7 @@ const releases = await fetchReleases(lang, -1);
       </div>
 
       {releases.length === 0 ? (
-        <div class="text-center py-12 text-slate-500 dark:text-slate-400 bg-slate-900/40 border border-slate-800 rounded-2xl">
+        <div class="text-center py-12 text-slate-400 bg-slate-900/40 border border-slate-800 rounded-2xl">
           {t.changelog.emptyState}
         </div>
       ) : (
