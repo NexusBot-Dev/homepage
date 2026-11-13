@@ -237,19 +237,19 @@ export const en: Dictionary = {
     ideaButton: '💡 Suggest an idea & help shape Nexus',
     items: [
       {
-        title: 'Live Alerts 2.0',
-        description: 'A button takes viewers straight to the stream, short drops no longer cause a second ping, and once the stream ends the live message turns into “Stream ended” – including the duration.',
-        status: 'Recently released',
-      },
-      {
-        title: 'Voice XP',
-        description: 'XP for gaming together: as soon as at least two members are unmuted in a voice channel, they earn experience. Can be turned on or off per server.',
+        title: 'AutoMod 2.0',
+        description: 'AutoMod is getting a major upgrade: more filters, finer settings per rule and clear punishments from warnings to timeouts – all easy to configure in the dashboard.',
         status: 'In progress',
       },
       {
-        title: 'Twitch Schedule as Server Events',
-        description: 'Your Twitch stream schedule automatically shows up as Discord events. Your community sees upcoming streams right in the server and can click “Interested” – if you move or cancel a stream, the event follows. With Premium, each streamer gets their own text and image.',
-        status: 'Recently released',
+        title: 'Embed Builder',
+        description: 'Design embeds exactly the way you want: colour, images, fields, footer and more – with a live preview right in the dashboard, posted to the channel of your choice.',
+        status: 'Planned',
+      },
+      {
+        title: 'Custom Log Channels & Colours',
+        description: 'Maximum overview for your mod team: split logs by type into their own channels (e.g. bans, timeouts, warnings) and match the embed colours to your server\'s design – available with Nexus Premium.',
+        status: 'Planned',
       },
     ],
   },

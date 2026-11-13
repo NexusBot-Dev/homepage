@@ -237,19 +237,19 @@ export const de: Dictionary = {
     ideaButton: '💡 Idee einreichen & Nexus mitgestalten',
     items: [
       {
-        title: 'Live-Alerts 2.0',
-        description: 'Ein Button führt direkt zum Stream, kurze Abbrüche lösen keinen doppelten Ping mehr aus, und nach dem Stream wird die Live-Nachricht zu „Stream beendet“ – inklusive Dauer.',
-        status: 'Kürzlich Veröffentlicht',
-      },
-      {
-        title: 'Voice-XP',
-        description: 'XP fürs gemeinsame Zocken: Sobald mindestens zwei Mitglieder ungemutet im Voice-Kanal sind, sammeln sie Erfahrungspunkte. Pro Server ein- und ausschaltbar.',
+        title: 'AutoMod 2.0',
+        description: 'Der AutoMod bekommt ein großes Upgrade: mehr Filter, feinere Einstellungen pro Regel und klare Strafen von Warnung bis Timeout – alles bequem im Dashboard einstellbar.',
         status: 'In Arbeit',
       },
       {
-        title: 'Twitch-Zeitplan als Server-Events',
-        description: 'Dein Twitch-Streamplan erscheint automatisch als Discord-Event. Deine Community sieht kommende Streams direkt im Server und kann auf „Interessiert“ klicken – verschiebst oder streichst du einen Termin, zieht das Event mit. Mit Premium bekommt jeder Streamer eigenen Text und ein eigenes Bild.',
-        status: 'Kürzlich Veröffentlicht',
+        title: 'Embed-Builder',
+        description: 'Gestalte Embeds genau so, wie du sie willst: Farbe, Bilder, Felder, Footer und mehr – mit Live-Vorschau direkt im Dashboard und gepostet in den Kanal deiner Wahl.',
+        status: 'Geplant',
+      },
+      {
+        title: 'Eigene Log-Kanäle & Farben',
+        description: 'Maximale Übersicht für dein Mod-Team: Teile Logs nach Typ in eigene Kanäle auf (z. B. Bans, Timeouts, Warnungen) und passe die Embed-Farben an dein Server-Design an – verfügbar mit Nexus Premium.',
+        status: 'Geplant',
       },
     ],
   },
