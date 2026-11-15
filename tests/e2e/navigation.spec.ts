@@ -106,3 +106,16 @@ test.describe('Navigation', () => {
     });
   }
 });
+
+test.describe('Seite lässt sich nicht seitlich verschieben', () => {
+  // Bei 1024 px stand früher die letzte Footer-Spalte 8 px über den Rand (zu große Mindestbreiten im Raster)
+  for (const path of ['/de/', '/en/', '/de/premium/']) {
+    for (const width of [360, 390, 768, 820, 1024, 1100, 1280]) {
+      test(`${path} bei ${width} px`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 800 });
+        await page.goto(path);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+      });
+    }
+  }
+});
