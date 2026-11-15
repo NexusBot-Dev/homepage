@@ -8,6 +8,8 @@ export const en: Dictionary = {
     wiki: 'Wiki',
     dashboard: 'Go to Dashboard',
     search: 'Search',
+    changelog: 'Changelog',
+    language: 'Language',
   },
   footer: {
     featuresGroup: 'Features',

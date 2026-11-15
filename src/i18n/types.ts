@@ -6,6 +6,8 @@ export interface Dictionary {
     wiki: string;
     dashboard: string;
     search: string;
+    changelog: string;
+    language: string;
   };
   footer: {
     featuresGroup: string;

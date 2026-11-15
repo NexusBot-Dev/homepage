@@ -14,12 +14,19 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+// Mit Schrägstrich am Ende (trailingSlash: 'always'), sonst kostet jeder Klick eine Weiterleitung
 const navLinks = [
-  { href: '/features', label: t.nav.features },
+  { href: '/features/', label: t.nav.features },
   { href: '/#roadmap', label: t.nav.roadmap },
   { href: '/#premium', label: t.nav.premium },
-  { href: '/wiki', label: t.nav.wiki },
+  { href: '/wiki/', label: t.nav.wiki },
+  { href: '/changelog/', label: t.nav.changelog },
 ];
+
+const LANG_LABELS: Record<string, { flag: string; short: string }> = {
+  de: { flag: '🇩🇪', short: 'DE' },
+  en: { flag: '🇬🇧', short: 'EN' },
+};
 
 const langPrefixPattern = new RegExp(`^/(${SUPPORTED_LANGS.join('|')})`);
 const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/';
@@ -45,7 +52,7 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-8">
+      <nav class="hidden lg:flex items-center gap-8">
         {navLinks.map(link => (
           <a href={localizedPath(lang, link.href)} class="text-sm font-medium text-slate-300 hover:text-primary-400 transition-colors">
             {link.label}
@@ -53,11 +60,11 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
         ))}
       </nav>
 
-      <!-- CTA Button + Sprachswitcher (Desktop) -->
-      <div class="hidden md:flex items-center gap-4">
+      <!-- Suche, Sprache, Dashboard (ab 1024 px) bzw. Sprache, Suche, Menü (Handy und Tablet: fünf Links passen erst ab lg) -->
+      <div class="flex items-center gap-2 lg:gap-4">
         <button
           onclick="window.toggleCommandPalette()"
-          class="flex items-center gap-2 bg-slate-950/80 border border-slate-800 hover:border-slate-700 rounded-lg pl-2.5 pr-1.5 py-1.5 lg:w-48 text-slate-400 hover:text-slate-200 transition-colors"
+          class="hidden lg:flex items-center gap-2 bg-slate-950/80 border border-slate-800 hover:border-slate-700 rounded-lg pl-2.5 pr-1.5 py-1.5 lg:w-48 text-slate-400 hover:text-slate-200 transition-colors"
           aria-label={t.nav.search}
         >
           <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
@@ -66,30 +73,53 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
             {lang === 'de' ? 'Strg' : 'Ctrl'} K
           </kbd>
         </button>
-        <div class="flex items-center bg-slate-950/80 border border-slate-800 rounded-lg p-1 gap-1">
-          {SUPPORTED_LANGS.map((l) => (
-            <a
-              href={resolvePath(`/${l}${pathWithoutLang}`)}
-              class={`px-2.5 py-1 rounded text-xs font-medium transition-all ${
-                l === lang
-                  ? 'bg-primary-500/20 text-primary-400 border border-primary-500/40 shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent'
-              }`}
-            >
-              {l.toUpperCase()}
-            </a>
-          ))}
-        </div>
-        <Button href="https://dashboard.trynexus.de/" variant="primary" size="sm">{t.nav.dashboard}</Button>
-      </div>
 
-      <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center gap-2">
-        <button onclick="window.toggleCommandPalette()" class="p-2 text-slate-400 hover:bg-slate-800 focus:outline-none rounded-lg text-sm" aria-label={t.nav.search}>
+        <!-- Sprachumschalter (wie im Dashboard), auf allen Bildschirmgrößen direkt sichtbar -->
+        <div class="relative" id="lang-switcher">
+          <button
+            type="button"
+            id="lang-switcher-btn"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="lang-dropdown"
+            aria-label={`${t.nav.language}: ${LANG_LABELS[lang]?.short ?? lang.toUpperCase()}`}
+            class="flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"
+          >
+            <span aria-hidden="true">{LANG_LABELS[lang]?.flag}</span>
+            <span>{LANG_LABELS[lang]?.short}</span>
+            <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <div
+            id="lang-dropdown"
+            class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-slate-900 border border-slate-800 shadow-xl py-1.5 z-50 text-sm"
+          >
+            {SUPPORTED_LANGS.map((l) => (
+              <a
+                href={resolvePath(`/${l}${pathWithoutLang}`)}
+                lang={l}
+                aria-current={l === lang ? 'true' : undefined}
+                class:list={[
+                  'w-full flex items-center gap-2 px-4 py-2 hover:bg-slate-800 transition-colors',
+                  l === lang ? 'text-primary-400 font-semibold' : 'text-slate-300',
+                ]}
+              >
+                <span aria-hidden="true">{LANG_LABELS[l]?.flag}</span>
+                <span>{LANG_LABELS[l]?.short ?? l.toUpperCase()}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="hidden lg:block">
+          <Button href="https://dashboard.trynexus.de/" variant="primary" size="sm">{t.nav.dashboard}</Button>
+        </div>
+
+        <!-- Handy und Tablet: Suche und Menü -->
+        <button onclick="window.toggleCommandPalette()" class="lg:hidden p-2 text-slate-400 hover:bg-slate-800 focus:outline-none rounded-lg text-sm" aria-label={t.nav.search}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
         </button>
 
-        <button id="mobile-menu-btn" class="p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
           <span class="sr-only">Open main menu</span>
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -100,29 +130,13 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-900">
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-slate-900">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
       {navLinks.map(link => (
         <a href={localizedPath(lang, link.href)} class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-primary-400 hover:bg-slate-800">
           {link.label}
         </a>
       ))}
-
-      <!-- Sprachswitcher (Mobile) -->
-      <div class="flex items-center gap-1 px-3 pt-2">
-        {SUPPORTED_LANGS.map((l) => (
-          <a
-            href={resolvePath(`/${l}${pathWithoutLang}`)}
-            class={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-              l === lang
-                ? 'bg-primary-500/20 text-primary-400 border border-primary-500/40'
-                : 'text-slate-400 hover:text-slate-200 border border-transparent'
-            }`}
-          >
-            {l.toUpperCase()}
-          </a>
-        ))}
-      </div>
 
       <div class="mt-4 pt-4 border-t border-slate-800 flex flex-col gap-2">
         <Button href="https://dashboard.trynexus.de/" variant="primary" size="sm">{t.nav.dashboard}</Button>
@@ -147,11 +161,43 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
     }
   }
 
+  function setupLangSwitcher() {
+    const btn = document.getElementById('lang-switcher-btn');
+    const dropdown = document.getElementById('lang-dropdown');
+    if (!btn || !dropdown || btn.dataset.bound === 'true') return;
+    btn.dataset.bound = 'true';
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = dropdown.classList.toggle('hidden') === false;
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  function closeLangDropdown() {
+    const dropdown = document.getElementById('lang-dropdown');
+    if (!dropdown || dropdown.classList.contains('hidden')) return;
+    dropdown.classList.add('hidden');
+    document.getElementById('lang-switcher-btn')?.setAttribute('aria-expanded', 'false');
+  }
+
+  // Einmal pro Seite: Klick daneben oder Escape schließt das Sprachmenü (der Header wird bei
+  // jedem Seitenwechsel neu gerendert, die Listener am document bleiben bestehen)
+  document.addEventListener('click', (e) => {
+    const switcher = document.getElementById('lang-switcher');
+    if (switcher && !switcher.contains(e.target as Node)) closeLangDropdown();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLangDropdown();
+  });
+
   // Run on initial load
   setupMobileMenu();
+  setupLangSwitcher();
 
   // Run on View Transitions page changes
   document.addEventListener('astro:page-load', () => {
     setupMobileMenu();
+    setupLangSwitcher();
   });
 </script>
