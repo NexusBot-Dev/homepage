@@ -27,12 +27,33 @@ test.describe('Sprachmenü', () => {
     await langButton(page).click();
     await expect(langMenu(page)).toBeVisible();
     await expect(langButton(page)).toHaveAttribute('aria-expanded', 'true');
-    await expect(langMenu(page).locator('a[aria-current="true"]')).toHaveText(/DE/);
+    await expect(langMenu(page).locator('a[aria-current="true"]')).toHaveText('Deutsch');
 
-    await langMenu(page).getByRole('link', { name: /EN/ }).click();
+    await langMenu(page).getByRole('link', { name: 'English' }).click();
     await expect(page).toHaveURL(/\/en\/premium\/$/);
     await expect(langButton(page)).toContainText('EN');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+
+  test('Flaggen als SVG: Button mit Kürzel, Menü mit ausgeschriebener Sprache', async ({ page }) => {
+    // Emoji-Flaggen zeigt Chrome unter Windows nur als Buchstaben
+    const loaded = (img: ReturnType<Page['locator']>) => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0);
+    await page.goto('/en/');
+    await expect(langButton(page)).toHaveText('EN');
+    await expect(langButton(page)).toHaveAttribute('aria-label', 'Language: English');
+    await expect(langButton(page).locator('img')).toHaveAttribute('src', '/flags/gb.svg');
+    expect(await loaded(langButton(page).locator('img'))).toBe(true);
+
+    await langButton(page).click();
+    const links = langMenu(page).getByRole('link');
+    await expect(links).toHaveText(['Deutsch', 'English']);
+    for (const [name, lang, flag] of [['Deutsch', 'de', 'de'], ['English', 'en', 'gb']]) {
+      const link = langMenu(page).getByRole('link', { name });
+      await expect(link).toHaveAttribute('lang', lang);
+      await expect(link.locator('img')).toHaveAttribute('src', `/flags/${flag}.svg`);
+      await expect.poll(() => loaded(link.locator('img'))).toBe(true);
+    }
+    expect(await page.locator('#lang-switcher').innerText()).not.toMatch(/[\u{1F1E6}-\u{1F1FF}]/u);
   });
 
   test('schließt bei Klick daneben und mit Escape', async ({ page }) => {
@@ -65,7 +86,7 @@ test.describe('Handy: Sprache direkt sichtbar', () => {
     await expect(page.locator('#mobile-menu')).toBeHidden();
 
     await langButton(page).click();
-    await langMenu(page).getByRole('link', { name: /EN/ }).click();
+    await langMenu(page).getByRole('link', { name: 'English' }).click();
     await expect(page).toHaveURL(/\/en\/$/);
   });
 

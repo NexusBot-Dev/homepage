@@ -23,9 +23,11 @@ const navLinks = [
   { href: '/changelog/', label: t.nav.changelog },
 ];
 
-const LANG_LABELS: Record<string, { flag: string; short: string }> = {
-  de: { flag: '🇩🇪', short: 'DE' },
-  en: { flag: '🇬🇧', short: 'EN' },
+// Flaggen als SVG (public/flags, aus flag-icons): Emoji-Flaggen zeigt Chrome unter Windows nur als Buchstaben.
+// Sprachnamen in der jeweiligen Sprache, damit man die eigene auch in einer fremden Oberfläche findet.
+const LANG_LABELS: Record<string, { flag: string; short: string; name: string }> = {
+  de: { flag: '/flags/de.svg', short: 'DE', name: 'Deutsch' },
+  en: { flag: '/flags/gb.svg', short: 'EN', name: 'English' },
 };
 
 const langPrefixPattern = new RegExp(`^/(${SUPPORTED_LANGS.join('|')})`);
@@ -82,16 +84,16 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
             aria-haspopup="true"
             aria-expanded="false"
             aria-controls="lang-dropdown"
-            aria-label={`${t.nav.language}: ${LANG_LABELS[lang]?.short ?? lang.toUpperCase()}`}
+            aria-label={`${t.nav.language}: ${LANG_LABELS[lang]?.name ?? lang.toUpperCase()}`}
             class="flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"
           >
-            <span aria-hidden="true">{LANG_LABELS[lang]?.flag}</span>
+            <img src={resolvePath(LANG_LABELS[lang]?.flag ?? '')} alt="" width="20" height="15" class="rounded-sm" />
             <span>{LANG_LABELS[lang]?.short}</span>
             <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
           <div
             id="lang-dropdown"
-            class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-slate-900 border border-slate-800 shadow-xl py-1.5 z-50 text-sm"
+            class="hidden absolute right-0 mt-2 w-40 rounded-xl bg-slate-900 border border-slate-800 shadow-xl py-1.5 z-50 text-sm"
           >
             {SUPPORTED_LANGS.map((l) => (
               <a
@@ -103,8 +105,8 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
                   l === lang ? 'text-primary-400 font-semibold' : 'text-slate-300',
                 ]}
               >
-                <span aria-hidden="true">{LANG_LABELS[l]?.flag}</span>
-                <span>{LANG_LABELS[l]?.short ?? l.toUpperCase()}</span>
+                <img src={resolvePath(LANG_LABELS[l]?.flag ?? '')} alt="" width="20" height="15" loading="lazy" class="rounded-sm" />
+                <span>{LANG_LABELS[l]?.name ?? l.toUpperCase()}</span>
               </a>
             ))}
           </div>
