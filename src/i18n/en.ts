@@ -329,4 +329,24 @@ export const en: Dictionary = {
   common: {
     invite: 'Invite Nexus',
   },
+  meta: {
+    siteDescription: 'The focused Discord bot for streamers and gaming communities. Instant alerts, real-time raid defense - no bloat, no filler.',
+    homeTitle: 'Nexus – Free Discord Bot for Moderation & Leveling',
+    features: 'Every Nexus module in detail: moderation, leveling, tickets, stream alerts, reaction roles and more.',
+    premium: 'Simple and transparent pricing for Nexus.',
+    changelog: 'All updates and release notes for Nexus.',
+    wiki: 'Documentation and setup guides for Nexus.',
+    wikiArticle: '{title} – documentation.',
+    privacy: 'Privacy policy for Nexus.',
+    terms: 'Terms of Service for Nexus.',
+    imprint: 'Legal notice for Nexus.',
+  },
+  notFound: {
+    title: 'Page Not Found',
+    description: 'The page you are looking for does not exist.',
+    heading: 'Page not found',
+    text: "Sorry, we couldn't find the page you're looking for. It might have been moved or deleted.",
+    homeButton: 'Go back home',
+    docsButton: 'Check the Documentation',
+  },
 };

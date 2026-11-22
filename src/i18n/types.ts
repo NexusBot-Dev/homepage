@@ -160,4 +160,26 @@ export interface Dictionary {
   common: {
     invite: string;
   };
+  /** Titel und Beschreibungen für Suchmaschinen und Link-Vorschauen (og:/twitter:) */
+  meta: {
+    siteDescription: string;
+    homeTitle: string;
+    features: string;
+    premium: string;
+    changelog: string;
+    wiki: string;
+    /** {title} = Titel des Artikels; nur wenn der Artikel keine eigene Beschreibung hat */
+    wikiArticle: string;
+    privacy: string;
+    terms: string;
+    imprint: string;
+  };
+  notFound: {
+    title: string;
+    description: string;
+    heading: string;
+    text: string;
+    homeButton: string;
+    docsButton: string;
+  };
 }

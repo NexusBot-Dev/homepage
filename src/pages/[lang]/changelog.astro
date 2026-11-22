@@ -15,7 +15,7 @@ const releases = loaded.slice(0, CHANGELOG_PAGE_SIZE);
 const hasArchive = loaded.length > CHANGELOG_PAGE_SIZE;
 ---
 
-<BaseLayout title={t.changelog.pageTitle} description="Alle Updates und Release Notes für Nexus.">
+<BaseLayout title={t.changelog.pageTitle} description={t.meta.changelog}>
   <div class="py-16 md:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
 

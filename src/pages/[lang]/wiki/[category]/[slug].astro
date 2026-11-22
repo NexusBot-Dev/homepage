@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { directus, readItems } from '../../../../lib/directus';
+import { useTranslations } from '../../../../i18n';
 
 const { lang: rawLang, category: rawCategory, slug: rawSlug } = Astro.params;
 let category = rawCategory;
 let slug = rawSlug;
 const lang = (rawLang || 'de').toLowerCase();
+const meta = useTranslations(lang).meta;
 
 // Trailing Slashes & Whitespace bereinigen
 slug = slug?.replace(/\/$/, '').trim();
@@ -100,7 +102,7 @@ if (!currentArticle) {
 
 <BaseLayout
   title={`${currentArticle.title} | Wiki`}
-  description={currentArticle.description || `${currentArticle.title} Dokumentation.`}
+  description={currentArticle.description || meta.wikiArticle.replace('{title}', currentArticle.title)}
   lang={lang}
 >
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -329,4 +329,25 @@ export const de: Dictionary = {
   common: {
     invite: 'Nexus einladen',
   },
+  meta: {
+    // Vorerst bewusst englisch, bis es einen guten deutschen Text gibt
+    siteDescription: 'The focused Discord bot for streamers and gaming communities. Instant alerts, real-time raid defense - no bloat, no filler.',
+    homeTitle: 'Nexus – Kostenloser Discord Bot für Moderation & Leveling',
+    features: 'Alle Nexus-Module im Detail: Moderation, Leveling, Tickets, Stream-Alerts, Reaction Roles und mehr.',
+    premium: 'Einfache und transparente Preise für Nexus.',
+    changelog: 'Alle Updates und Release Notes für Nexus.',
+    wiki: 'Dokumentation und Konfigurationsanleitungen für Nexus.',
+    wikiArticle: '{title} – Dokumentation.',
+    privacy: 'Datenschutzerklärung für Nexus.',
+    terms: 'Nutzungsbedingungen (Terms of Service) für Nexus.',
+    imprint: 'Impressum von Nexus.',
+  },
+  notFound: {
+    title: 'Seite nicht gefunden',
+    description: 'Diese Seite gibt es nicht.',
+    heading: 'Seite nicht gefunden',
+    text: 'Die Seite, die du suchst, gibt es leider nicht. Vielleicht wurde sie verschoben oder gelöscht.',
+    homeButton: 'Zur Startseite',
+    docsButton: 'Zum Wiki',
+  },
 };

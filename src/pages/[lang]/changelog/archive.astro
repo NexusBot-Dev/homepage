@@ -12,7 +12,7 @@ const t = useTranslations(lang);
 const releases = await fetchReleases(lang, -1);
 ---
 
-<BaseLayout title={t.changelog.archiveTitle} description="Alle Updates und Release Notes für Nexus.">
+<BaseLayout title={t.changelog.archiveTitle} description={t.meta.changelog}>
   <div class="py-16 md:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
 

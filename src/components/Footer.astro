@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logoImg from '../assets/logo.png';
 
-import { BRAND_NAME, SITE_DESCRIPTION } from '../config';
+import { BRAND_NAME } from '../config';
 import { localizedPath } from '../utils/navigation';
 import { useTranslations } from '../i18n';
 
@@ -67,7 +67,7 @@ const footerGroups = [
           <span class="font-heading font-bold text-xl text-white">{BRAND_NAME}</span>
         </a>
         <p class="text-slate-400 text-sm mb-6">
-          {SITE_DESCRIPTION}
+          {t.meta.siteDescription}
         </p>
       </div>
 

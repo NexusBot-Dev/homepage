@@ -2,12 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PricingComponent from '../../components/Premium.astro';
 import FAQ from '../../components/FAQ.astro';
+import { useTranslations } from '../../i18n';
 
 const { lang: rawLang } = Astro.params;
 const lang = rawLang ?? 'de';
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Premium" description="Einfache und transparente Preise für Nexus.">
+<BaseLayout title="Premium" description={t.meta.premium}>
   <div class="pt-16 bg-[#0c0c0f]">
     <PricingComponent lang={lang} />
   </div>

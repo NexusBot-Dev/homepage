@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FeatureList from '../../components/FeatureList.astro';
+import { useTranslations } from '../../i18n';
 
 const { lang: rawLang } = Astro.params;
 const lang = rawLang ?? 'de';
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Features" description="Alle Nexus-Module im Detail: Moderation, Leveling, Tickets, Stream-Alerts, Reaction Roles und mehr.">
+<BaseLayout title="Features" description={t.meta.features}>
   <FeatureList lang={lang} />
 </BaseLayout>

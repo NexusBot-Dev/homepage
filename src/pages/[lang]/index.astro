@@ -13,7 +13,7 @@ const lang = rawLang ?? DEFAULT_LANG;
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Nexus – Kostenloser Discord Bot für Moderation & Leveling" appendSiteTitle={false}>
+<BaseLayout title={t.meta.homeTitle} appendSiteTitle={false}>
     <Hero lang={lang} />
     <Features lang={lang} />
     <Roadmap lang={lang} />

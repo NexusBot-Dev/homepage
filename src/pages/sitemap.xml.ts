@@ -11,6 +11,7 @@ type SitemapEntry = {
 const localizedStaticPaths: string[] = [
   '/',
   '/features/',
+  '/premium/',
   '/wiki/',
   '/terms/',
   '/changelog/',

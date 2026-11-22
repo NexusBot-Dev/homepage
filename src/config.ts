@@ -2,7 +2,6 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = 'Nexus Bot';
-export const SITE_DESCRIPTION = 'The focused Discord bot for streamers and gaming communities. Instant alerts, real-time raid defense - no bloat, no filler.';
 export const SITE_URL = 'https://trynexus.de';
 export const REPOSITORY_URL = 'https://github.com/NexusBot-Dev/homepage';
 

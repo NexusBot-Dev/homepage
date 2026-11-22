@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { directus, readSingleton } from '../../lib/directus';
+import { useTranslations } from '../../i18n';
 
 const { lang: rawLang } = Astro.params;
 const lang = (rawLang || 'de').toLowerCase();
+const t = useTranslations(lang);
 
 // Typ-Sicherheit & Fallback-Daten
 let termsData = {
@@ -61,7 +63,7 @@ try {
 }
 ---
 
-<BaseLayout title={termsData.title} description="Nutzungsbedingungen (Terms of Service) für Nexus.">
+<BaseLayout title={termsData.title} description={t.meta.terms}>
   <div class="py-16 md:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
       <h1 class="text-4xl md:text-5xl font-bold text-white mb-8">
