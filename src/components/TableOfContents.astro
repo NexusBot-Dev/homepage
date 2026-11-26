@@ -64,5 +64,5 @@ const toc = headings.filter((heading) => heading.depth > 1 && heading.depth < 4)
     });
   }
 
-  document.addEventListener('astro:page-load', setupTocHighlighting);
+  setupTocHighlighting();
 </script>

@@ -19,6 +19,21 @@ export default defineConfig({
     inlineStylesheets: 'always'
   },
 
+  // Strikte CSP für Scripts: Astro schreibt pro Seite ein <meta>-Tag mit den Hashes aller eigenen Scripts.
+  // Inline-Event-Handler (onclick=…) und eingeschleuste Scripts laufen damit nicht mehr.
+  // Gilt zusätzlich zur CSP aus nginx (beide müssen erfüllt sein). Abschalten: csp-Block entfernen.
+  security: {
+    csp: {
+      scriptDirective: {
+        resources: ["'self'", 'https://matomo.trynexus.de']
+      },
+      styleDirective: {
+        // style="…"-Attribute und eingebettete Styles bleiben erlaubt – das Risiko liegt bei Scripts
+        resources: ["'self'", "'unsafe-inline'"]
+      }
+    }
+  },
+
   vite: {
     server: {
       allowedHosts: ['trynexus.de', 'www.trynexus.de']

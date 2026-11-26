@@ -34,7 +34,7 @@ test.describe('search modal regressions', () => {
   test('search results stay sharp and readable over blurred backdrop', async ({ page }) => {
     await page.route('**/search-index.json', (route) => route.fulfill({ json: index }));
     await page.goto('/de/');
-    await page.locator('button[onclick="window.toggleCommandPalette()"]:visible').first().click();
+    await page.locator('[data-command-palette-toggle]:visible').first().click();
     await page.locator('#search-input').fill('stream');
 
     const palette = page.locator('#command-palette > div').nth(1);

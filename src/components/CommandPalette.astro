@@ -4,6 +4,7 @@ import { resolvePath } from '../utils/navigation';
 
 <div
   id="command-palette"
+  data-base-path={resolvePath('/')}
   class="fixed inset-0 z-[100] hidden isolate overflow-y-auto p-4 sm:p-6 md:p-20"
   role="dialog"
   aria-modal="true"
@@ -66,8 +67,10 @@ import { resolvePath } from '../utils/navigation';
   </div>
 </div>
 
-<script is:inline define:vars={{ resolvePath: resolvePath('/') }}>
-  // We use define:vars to pass the base path resolution to the client-side script
+<script>
+  // @ts-nocheck – unverändertes Template-JS (war bis zur CSP-Umstellung is:inline und damit ungeprüft)
+  // Basis-Pfad kommt per data-Attribut (früher define:vars – das erzwingt is:inline, und das blockiert die CSP)
+  const resolvePath = document.getElementById('command-palette')?.dataset.basePath ?? '/';
   
   function setupSearch() {
     const palette = document.getElementById('command-palette');
@@ -192,7 +195,5 @@ import { resolvePath } from '../utils/navigation';
 
   }
 
-  // Setup on page load and view transition
   setupSearch();
-  document.addEventListener('astro:page-load', setupSearch);
 </script>

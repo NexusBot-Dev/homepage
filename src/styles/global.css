@@ -1,4 +1,9 @@
 @import "tailwindcss";
+
+/* Weiche Seitenwechsel ohne <ClientRouter /> (der verträgt sich nicht mit der CSP) – native View Transitions des Browsers */
+@view-transition {
+  navigation: auto;
+}
 @plugin "@tailwindcss/typography";
 
 @theme {

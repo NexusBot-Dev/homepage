@@ -2,6 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
+  // CSP-Tests brauchen den gebauten Server (Astro setzt die CSP nicht im Dev-Modus) → npm run test:e2e:build
+  testIgnore: ['**/csp.spec.ts'],
   timeout: 30_000,
   expect: {
     timeout: 5_000,

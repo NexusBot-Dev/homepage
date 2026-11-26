@@ -29,6 +29,7 @@
     "build": "astro build",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "test:e2e:build": "playwright test -c playwright.build.config.ts",
     "preview": "astro preview",
     "astro": "astro"
   },

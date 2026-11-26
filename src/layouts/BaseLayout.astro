@@ -2,7 +2,6 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/space-grotesk';
 import { resolvePath } from '../utils/navigation';
-import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -185,10 +184,10 @@ const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
     
     <title>{fullTitle}</title>
 
-    <ClientRouter />
     <!-- Matomo -->
-    <script is:inline>
-    var _paq = window._paq = window._paq || [];
+    <script>
+    // Gebündelt statt is:inline, damit Astro den Hash für die CSP kennt
+    var _paq = (window as any)._paq = (window as any)._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(["setDoNotTrack", true]);
     _paq.push(["disableCookies"]);
@@ -199,7 +198,7 @@ const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
         _paq.push(['setTrackerUrl', u+'matomo.php']);
         _paq.push(['setSiteId', '2']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        g.async=true; g.src=u+'matomo.js'; s.parentNode?.insertBefore(g,s);
     })();
     </script>
     <!-- End Matomo Code -->
@@ -215,7 +214,7 @@ const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
 
     <!-- Global Intersection Observer for Scroll Animations -->
     <script>
-      document.addEventListener('astro:page-load', () => {
+      {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -231,7 +230,7 @@ const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
         document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
           observer.observe(el);
         });
-      });
+      }
     </script>
   </body>
 </html>
