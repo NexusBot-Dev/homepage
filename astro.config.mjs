@@ -19,7 +19,7 @@ export default defineConfig({
     inlineStylesheets: 'always'
   },
 
-  // Strikte CSP für Scripts: Astro schreibt pro Seite ein <meta>-Tag mit den Hashes aller eigenen Scripts.
+  // Strikte CSP für Scripts: Astro schickt sie bei SSR als HTTP-Header (Hashes für eventuelle Inline-Scripts).
   // Inline-Event-Handler (onclick=…) und eingeschleuste Scripts laufen damit nicht mehr.
   // Gilt zusätzlich zur CSP aus nginx (beide müssen erfüllt sein). Abschalten: csp-Block entfernen.
   security: {
@@ -35,6 +35,11 @@ export default defineConfig({
   },
 
   vite: {
+    build: {
+      // Scripts immer als eigene Datei unter /_astro/ statt inline ins HTML – dann reicht in der
+      // nginx-CSP `script-src 'self'` ohne 'unsafe-inline' (nginx kennt Astros Hashes nicht)
+      assetsInlineLimit: 0
+    },
     server: {
       allowedHosts: ['trynexus.de', 'www.trynexus.de']
     },
