@@ -3,7 +3,6 @@ import type { Dictionary } from './types';
 export const de: Dictionary = {
   nav: {
     features: 'Features',
-    roadmap: 'Roadmap',
     premium: 'Premium',
     wiki: 'Wiki',
     dashboard: 'Zum Dashboard',
@@ -14,7 +13,6 @@ export const de: Dictionary = {
   footer: {
     featuresGroup: 'Features',
     overview: 'Übersicht',
-    roadmap: 'Roadmap',
     premiumPromo: 'Premium',
     supportGroup: 'Support & Hilfe',
     supportServer: 'Support Server',
@@ -144,7 +142,7 @@ export const de: Dictionary = {
           },
           {
             title: 'AutoMod',
-            description: 'Gesperrte Schlagworte und Honeypot-Kanäle, integriert über Discords native AutoMod-Schnittstelle.',
+            description: 'Wortlisten und Presets, Namens- und Link-Filter, Honeypot-Kanäle und automatische Eskalation von Warnung bis Bann – auf Basis von Discords nativem AutoMod.',
             tag: 'free',
           },
           {
@@ -228,30 +226,6 @@ export const de: Dictionary = {
             tag: 'free',
           },
         ],
-      },
-    ],
-  },
-  roadmap: {
-    heading: 'Die',
-    headingBrand: 'Nexus',
-    subtitle: 'Bereit für das nächste Level. Nexus liefert dir schon heute maximale Performance. Und das Beste: Wir entwickeln konstant weiter.',
-    ideaPrompt: 'Deine Wunsch-Funktion ist nicht dabei?',
-    ideaButton: '💡 Idee einreichen & Nexus mitgestalten',
-    items: [
-      {
-        title: 'AutoMod 2.0',
-        description: 'Der AutoMod bekommt ein großes Upgrade: mehr Filter, feinere Einstellungen pro Regel und klare Strafen von Warnung bis Timeout – alles bequem im Dashboard einstellbar.',
-        status: 'In Arbeit',
-      },
-      {
-        title: 'Embed-Builder',
-        description: 'Gestalte Embeds genau so, wie du sie willst: Farbe, Bilder, Felder, Footer und mehr – mit Live-Vorschau direkt im Dashboard und gepostet in den Kanal deiner Wahl.',
-        status: 'Geplant',
-      },
-      {
-        title: 'Eigene Log-Kanäle & Farben',
-        description: 'Maximale Übersicht für dein Mod-Team: Teile Logs nach Typ in eigene Kanäle auf (z. B. Bans, Timeouts, Warnungen) und passe die Embed-Farben an dein Server-Design an – verfügbar mit Nexus Premium.',
-        status: 'Geplant',
       },
     ],
   },

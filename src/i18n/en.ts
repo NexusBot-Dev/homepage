@@ -3,7 +3,6 @@ import type { Dictionary } from './types';
 export const en: Dictionary = {
   nav: {
     features: 'Features',
-    roadmap: 'Roadmap',
     premium: 'Premium',
     wiki: 'Wiki',
     dashboard: 'Go to Dashboard',
@@ -14,7 +13,6 @@ export const en: Dictionary = {
   footer: {
     featuresGroup: 'Features',
     overview: 'Overview',
-    roadmap: 'Roadmap',
     premiumPromo: 'Premium',
     supportGroup: 'Support & Help',
     supportServer: 'Support Server',
@@ -144,7 +142,7 @@ export const en: Dictionary = {
           },
           {
             title: 'AutoMod',
-            description: 'Blocked keywords and honeypot channels, integrated via Discord\u2019s native AutoMod interface.',
+            description: 'Word lists and presets, name and link filters, honeypot channels and automatic escalation from warning to ban \u2013 built on Discord\u2019s native AutoMod.',
             tag: 'free',
           },
           {
@@ -228,30 +226,6 @@ export const en: Dictionary = {
             tag: 'free',
           },
         ],
-      },
-    ],
-  },
-  roadmap: {
-    heading: 'The',
-    headingBrand: 'Nexus',
-    subtitle: 'Ready for the next level. Nexus already delivers maximum performance today. And the best part: we keep building.',
-    ideaPrompt: 'Missing the feature you were hoping for?',
-    ideaButton: '💡 Suggest an idea & help shape Nexus',
-    items: [
-      {
-        title: 'AutoMod 2.0',
-        description: 'AutoMod is getting a major upgrade: more filters, finer settings per rule and clear punishments from warnings to timeouts – all easy to configure in the dashboard.',
-        status: 'In progress',
-      },
-      {
-        title: 'Embed Builder',
-        description: 'Design embeds exactly the way you want: colour, images, fields, footer and more – with a live preview right in the dashboard, posted to the channel of your choice.',
-        status: 'Planned',
-      },
-      {
-        title: 'Custom Log Channels & Colours',
-        description: 'Maximum overview for your mod team: split logs by type into their own channels (e.g. bans, timeouts, warnings) and match the embed colours to your server\'s design – available with Nexus Premium.',
-        status: 'Planned',
       },
     ],
   },

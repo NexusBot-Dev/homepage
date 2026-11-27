@@ -102,16 +102,16 @@ test.describe('Handy: Sprache direkt sichtbar', () => {
 });
 
 test.describe('Navigation', () => {
-  test('Desktop: fünf Links, Changelog als fünfter', async ({ page }) => {
+  test('Desktop: vier Links, Changelog als vierter', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/en/');
     const links = page.locator('header nav a');
-    await expect(links).toHaveText(['Features', 'Roadmap', 'Premium', 'Wiki', 'Changelog']);
+    await expect(links).toHaveText(['Features', 'Premium', 'Wiki', 'Changelog']);
     for (const link of await links.all()) {
       const href = (await link.getAttribute('href'))!;
       if (!href.includes('#')) expect(href, 'kein Umweg über eine Weiterleitung').toMatch(/\/$/);
     }
-    await links.nth(4).click();
+    await links.nth(3).click();
     await expect(page).toHaveURL(/\/en\/changelog\/$/);
     await expect(page.locator('#lang-switcher-btn')).toBeVisible(); // echte Seite, keine 404
   });
@@ -121,7 +121,7 @@ test.describe('Navigation', () => {
       await page.setViewportSize({ width, height: 800 });
       await page.goto('/de/');
       expect(await headerOverflow(page)).toEqual([]);
-      // Unter 1024 px: Menü-Knopf statt Links (fünf Links passen erst ab da)
+      // Unter 1024 px: Menü-Knopf statt Links (die Links passen erst ab da)
       await expect(page.locator('#mobile-menu-btn')).toBeVisible({ visible: width < 1024 });
       await expect(page.locator('header nav')).toBeVisible({ visible: width >= 1024 });
     });

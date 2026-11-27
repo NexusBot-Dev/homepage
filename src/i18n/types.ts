@@ -1,7 +1,6 @@
 export interface Dictionary {
   nav: {
     features: string;
-    roadmap: string;
     premium: string;
     wiki: string;
     dashboard: string;
@@ -12,7 +11,6 @@ export interface Dictionary {
   footer: {
     featuresGroup: string;
     overview: string;
-    roadmap: string;
     premiumPromo: string;
     supportGroup: string;
     supportServer: string;
@@ -102,18 +100,6 @@ export interface Dictionary {
         description: string;
         tag?: 'free' | 'premium' | 'soon';
       }[];
-    }[];
-  };
-  roadmap: {
-    heading: string;
-    headingBrand: string;
-    subtitle: string;
-    ideaButton: string;
-    ideaPrompt: string;
-    items: {
-      title: string;
-      description: string;
-      status: string;
     }[];
   };
   wiki: {

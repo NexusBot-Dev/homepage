@@ -17,7 +17,6 @@ const t = useTranslations(lang);
 // Mit Schrägstrich am Ende (trailingSlash: 'always'), sonst kostet jeder Klick eine Weiterleitung
 const navLinks = [
   { href: '/features/', label: t.nav.features },
-  { href: '/#roadmap', label: t.nav.roadmap },
   { href: '/#premium', label: t.nav.premium },
   { href: '/wiki/', label: t.nav.wiki },
   { href: '/changelog/', label: t.nav.changelog },
@@ -62,7 +61,7 @@ const pathWithoutLang = Astro.url.pathname.replace(langPrefixPattern, '') || '/'
         ))}
       </nav>
 
-      <!-- Suche, Sprache, Dashboard (ab 1024 px) bzw. Sprache, Suche, Menü (Handy und Tablet: fünf Links passen erst ab lg) -->
+      <!-- Suche, Sprache, Dashboard (ab 1024 px) bzw. Sprache, Suche, Menü (Handy und Tablet: die Links passen erst ab lg) -->
       <div class="flex items-center gap-2 lg:gap-4">
         <button
           data-command-palette-toggle
