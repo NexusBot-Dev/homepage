@@ -63,14 +63,14 @@ export const de: Dictionary = {
     subtitlePrefix: 'Kein Feature versteckt. Kein Abo-Trick. Nur ein',
     subtitleBotWord: 'Bot',
     subtitleSuffix: ', der funktioniert.',
-    earlyBirdBadge: 'Early-Bird: 3 Monate Premium gratis – nur bis 30.11.2026!',
+    earlyBirdBadge: 'Early-Bird: 3 Monate Premium gratis - nur bis 30.11.2026!',
     free: {
       name: 'Free',
       tagline: 'Alles was du brauchst, um loszulegen.',
       priceSuffix: '/ für immer',
       cta: 'Nexus einladen',
       features: [
-        'Moderation, Leveling & Roles – vollständig',
+        'Moderation, Leveling & Roles - vollständig',
         'Stream Alerts (je 1x Twitch, Kick & YouTube)',
         'Streamplan als Server-Events (1 Streamer)',
         'Bis zu 5 gespeicherte Embeds',
@@ -142,7 +142,7 @@ export const de: Dictionary = {
           },
           {
             title: 'AutoMod',
-            description: 'Wortlisten und Presets, Namens- und Link-Filter, Honeypot-Kanäle und automatische Eskalation von Warnung bis Bann – auf Basis von Discords nativem AutoMod.',
+            description: 'Wortlisten und Presets, Namens- und Link-Filter, Honeypot-Kanäle und automatische Eskalation von Warnung bis Bann - auf Basis von Discords nativem AutoMod.',
             tag: 'free',
           },
           {
@@ -187,7 +187,7 @@ export const de: Dictionary = {
         features: [
           {
             title: 'Gespeicherte Embeds',
-            description: 'Wiederverwendbare, formatierte Nachrichten für Regeln, Ankündigungen und mehr – jederzeit abrufbar.',
+            description: 'Wiederverwendbare, formatierte Nachrichten für Regeln, Ankündigungen und mehr - jederzeit abrufbar.',
             tag: 'free',
           },
           {
@@ -217,7 +217,7 @@ export const de: Dictionary = {
           },
           {
             title: 'Web-Dashboard',
-            description: 'Alle Module bequem über dashboard.trynexus.de verwalten – Login sicher per Discord OAuth2.',
+            description: 'Alle Module bequem über dashboard.trynexus.de verwalten - Login sicher per Discord OAuth2.',
             tag: 'free',
           },
           {
@@ -236,11 +236,11 @@ export const de: Dictionary = {
   highlights: {
     heading: 'Alles was du brauchst.',
     headingHighlight: 'Ohne das übliche Bot-Chaos.',
-    subtitle: 'Schluss mit überladenen Funktionen und versteckten Kosten. Nexus gibt dir die wichtigsten Tools für deinen Server – logisch aufgebaut, blitzschnell und absolut transparent.',
+    subtitle: 'Schluss mit überladenen Funktionen und versteckten Kosten. Nexus gibt dir die wichtigsten Tools für deinen Server - logisch aufgebaut, blitzschnell und absolut transparent.',
     card1: {
       title: 'In 5 Schritten startklar.',
       subtitle: 'Kein manuelles Konfigurieren',
-      description: 'Sobald Nexus deinem Server beitritt, meldet er sich automatisch und führt dich durch ein interaktives Setup – direkt in Discord. Rollenprüfung, Log-Channel, Willkommensnachrichten: alles in fünf kurzen Schritten, ohne eine einzige Zeile zu tippen.',
+      description: 'Sobald Nexus deinem Server beitritt, begrüßt er dich automatisch und führt dich durch ein interaktives Setup - direkt in Discord. Rollenprüfung, Log-Channel, Willkommensnachrichten: alles in fünf kurzen Schritten, ohne eine einzige Zeile zu tippen.',
       mockupGreeting: '👋 Hallo, ich bin Nexus!',
       mockupLine1: 'Ich helfe dir deinen Server zu verwalten.',
       mockupLine2: 'Klicke auf Setup starten um mich einzurichten.',
@@ -253,7 +253,7 @@ export const de: Dictionary = {
     },
     card2: {
       title: 'Voller Fokus auf Fairness.',
-      description: 'Leveling, Moderation, Reaction Roles – alle Kernfeatures sind kostenlos, für immer. Unser Premium-Modell streicht keine Funktionen, sondern erweitert nur, was ohnehin schon da ist.',
+      description: 'Leveling, Moderation, Reaction Roles - alle Kernfeatures sind kostenlos, für immer. Unser Premium-Modell streicht keine Funktionen, sondern erweitert nur, was ohnehin schon da ist.',
     },
     card3: {
       title: 'Aktivität, die belohnt wird.',
@@ -284,7 +284,7 @@ export const de: Dictionary = {
       },
       {
         question: 'Ist der Bot wirklich komplett kostenlos?',
-        answer: 'Ja, alle grundlegenden Kernfunktionen wie Leveling, Moderation und Reaction Roles sind zu 100 % kostenlos und ohne Paywall nutzbar. Premium erweitert den Bot um höhere Limits und Komfort-Funktionen wie zeitgesteuerte Embeds – was heute kostenlos ist, bleibt kostenlos.',
+        answer: 'Ja, alle grundlegenden Kernfunktionen wie Leveling, Moderation und Reaction Roles sind zu 100 % kostenlos und ohne Paywall nutzbar. Premium erweitert den Bot um höhere Limits und Komfort-Funktionen wie zeitgesteuerte Embeds - was heute kostenlos ist, bleibt kostenlos.',
       },
       {
         question: 'Werden meine Serverdaten oder Chatlogs verkauft?',
@@ -306,12 +306,12 @@ export const de: Dictionary = {
   meta: {
     // Vorerst bewusst englisch, bis es einen guten deutschen Text gibt
     siteDescription: 'The focused Discord bot for streamers and gaming communities. Instant alerts, real-time raid defense - no bloat, no filler.',
-    homeTitle: 'Nexus – Kostenloser Discord Bot für Moderation & Leveling',
+    homeTitle: 'Nexus - Kostenloser Discord Bot für Moderation & Leveling',
     features: 'Alle Nexus-Module im Detail: Moderation, Leveling, Tickets, Stream-Alerts, Reaction Roles und mehr.',
     premium: 'Einfache und transparente Preise für Nexus.',
     changelog: 'Alle Updates und Release Notes für Nexus.',
     wiki: 'Dokumentation und Konfigurationsanleitungen für Nexus.',
-    wikiArticle: '{title} – Dokumentation.',
+    wikiArticle: '{title} - Dokumentation.',
     privacy: 'Datenschutzerklärung für Nexus.',
     terms: 'Nutzungsbedingungen (Terms of Service) für Nexus.',
     imprint: 'Impressum von Nexus.',
